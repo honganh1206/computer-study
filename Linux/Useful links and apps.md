@@ -1,3 +1,32 @@
+## Install Ubuntu & Configs
+
+```cmd
+wsl --list
+wsl --install
+```
+
+- Common issues to deal with when installing:
+
+    - [Windows Subsystem for Linux 2: Temporary failure resolving 'archive.ubuntu.com'](https://askubuntu.com/questions/1450120/windows-subsystem-for-linux-2-temporary-failure-resolving-archive-ubuntu-com)
+    - [System has not been booted with systemd as init system (PID 1). Can't operate](https://askubuntu.com/questions/1379425/system-has-not-been-booted-with-systemd-as-init-system-pid-1-cant-operate)
+    - [Cannot connect to docker daemon/Start docker whenver Ubuntu WSL2 is run](https://stackoverflow.com/questions/44678725/cannot-connect-to-the-docker-daemon-at-unix-var-run-docker-sock-is-the-docker)
+
+```bash
+# Resolve archive ubuntu failure
+sudo rm /etc/resolv.conf
+sudo bash -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'
+sudo bash -c 'echo "[network]" > /etc/wsl.conf'
+sudo bash -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'
+sudo chattr +i /etc/resolv.conf
+
+# Integrate systemd
+sudo nano /etc/wsl.conf
+
+# Edit the file to this
+[boot]
+systemd=true
+```
+
 ## [Edit mount points at startup](https://www.reddit.com/r/PleX/comments/11jjg8e/comment/k4iwpwh/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
 
 
