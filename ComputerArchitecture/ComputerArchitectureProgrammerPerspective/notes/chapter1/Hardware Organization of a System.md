@@ -4,18 +4,6 @@ tags:
 cssclasses:
   - center-images
 ---
-# Process Read and Interpret Instructions Stored in memory
-
-> [!summary] 3-sentence summary
-> - A system consists of three categories of components: Components to handle inputs and outputs (Controller + Adapters), those who handle data transfer (Buses) and the rest to handle instruction storage and execution (PC, register file and ALU).
-> - The main memory is responsible for storing the data from the inputs in a form of a sequence of bytes (think of it as a SQL Server database), while the register file stores the data ready to be processed by the ALU (similar to Redis)
-> - The processor will execute the machine-language instructions with the ALU (think of it like the code you write to handle logic) on the **main** routine of the program then display the result to the user.
-
-
-- The **shell** is **an application program** and **a command-line interpreter** that waits for you to type a command line before executing the command
-- How the shell executes the executables: It first check if the command corresponds to  built-in shell command → If not then the shell loads the program then run it
-
-## Hardware Organization of a System
 
 ![[F1.4-Hardware organization of a typical system.drawio.svg|Hardware organization of a typical system]]
 
@@ -61,31 +49,3 @@ cssclasses:
 > [!important] 
 > 
 > While the note above describes a simple implementation of the instruction set architecture, modern processors use far more complex mechanisms to speed up execution.
-
-
-## Running the `hello` program
-
-
-> [!info]
-> 
-> What described below will just be the big picture.
-
-![[Pasted image 20240908114221.png]]
-
-
-1. When we type `./hello`, the shell program reads *each character* into a register then stores it in memory
-2. (Figure 1.5) When we hit enter: The shell loads the executable `hello` file from the disk → main memory by *executing a sequence of instructions*
-3. (Figure 1.6) The data travels directly from disk to main memory *without passing through the processor* using **direct memory access** (DMA - more in chapter 6) - 
-
-![[Pasted image 20240908114520.png|500]]
-
-4. (Figure 1.7 - Pre-condition: Code and data loaded into memory) The processor executes the machine-language instructions in the program’s **main** routine: Copy the bytes from `hello, world\n` string from memory to the register file → to display device → displayed to user
-
-![[Pasted image 20240908115105.png]]
-
-
-> [!important]
-> 
-> You can see that the I/O bridge and I/O bus are invoked A LOT here to transfer data continuously between components.
-
-
