@@ -77,7 +77,7 @@ gcc -o [executable_name] [source_file].c
 	- Learn basic concepts of Unix I/O like files and descriptors
 	- Develop an I/O package to deal with short count (where the library function reads of *part* of the input data)
 	- C standard I/O library and its relationship with Linux I/O
-- Chapter 11:
+- [[Chapter 11]]:
 	- Learn how networks tie together concepts we study earlier (processes, signals, byte ordering, etc.)
 	- Learn to write a simple Web server
 - [[Chapter 12]]:

@@ -1,0 +1,16 @@
+---
+tags:
+  - "#study"
+cssclasses:
+  - center-images
+---
+Two constant demands: **Do more and do faster**. Both can be achieved when *the processor does more than one thing at once*.
+
+**Concurrency** means *a system does simultaneous activities*, while **parallelism** means *the use of concurrency to make a system faster*.
+
+
+> [!important] Parallelism is cool
+> Parallelism can be exploited at **multiple levels** of abstraction in a computer system.
+
+[[Thread-Level Concurrency]]
+

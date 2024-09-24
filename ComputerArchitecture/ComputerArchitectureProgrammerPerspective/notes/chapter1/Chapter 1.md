@@ -12,3 +12,5 @@ cssclasses:
 - [[Caches Matter]]
 - [[Storage devices form a hierarchy]]
 - [[The OS manages the hardware]]
+- [[Systems communicate with other systems using networks]]
+- [[Important themes]]
