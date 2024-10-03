@@ -39,7 +39,7 @@ gcc -o [executable_name] [source_file].c
 
 ## Overview of the book
 
-- [[Chapter 1]]: Introduce the major ideas and themes in computer systems
+- [[Chapter 1 - A Tour of Computer Systems]]: Introduce the major ideas and themes in computer systems
 - Chapter 2: 
 	- Computer arithmetic
 	- Two’s-complement (represent signed integers in binary form)
@@ -52,7 +52,7 @@ gcc -o [executable_name] [source_file].c
 	- Implementation of procedures (stack allocation, register usage conventions, and parameter passing)
 	- Integer and floating-point arithmetic
 	- Use of machine-level view of programs to understand common code security vulnerabilities
-- Chapter 4:
+- [[Chapter 4]]:
 	- Basic combinational and sequential logic elements and how these elements can be combined
 	- Pipelining: How different steps are structured to process an instruction as separate stages
 	- HCL - A hardware description language to describe the control logic for the processor designs

@@ -1,0 +1,24 @@
+{
+	"nodes":[
+		{"id":"601d17ae87c86700","type":"group","x":-280,"y":-2160,"width":3000,"height":1360,"color":"5","label":"Preface to chapter 2"},
+		{"id":"93bd9864d9db3c94","type":"file","file":"02-Areas/Computer/ComputerArchitecture/ComputerArchitectureProgrammerPerspective/notes/chapter2/Chapter 2 - Representing and Manipulating Information.md","x":-200,"y":-100,"width":400,"height":400,"color":"4"},
+		{"id":"f541307dcbbd5555","type":"file","file":"05-Fleeting/2.1.Information Storage.md","x":480,"y":-680,"width":400,"height":400},
+		{"id":"e3e0783e0b1db259","type":"file","file":"05-Fleeting/2.1.1.Hexadecimal Notation.md","x":1200,"y":-440,"width":400,"height":400},
+		{"id":"ccc262e813bee29e","type":"file","file":"02-Areas/Programming/Concepts/CRDT/5000x faster CRDTs An Adventure in Optimization/Three important representations of numbers.md","x":436,"y":-1360,"width":400,"height":400},
+		{"id":"4c75f375eed7b8e3","type":"file","file":"05-Fleeting/What a group of bits can do.md","x":-200,"y":-1320,"width":400,"height":400},
+		{"id":"8c35445e95bd1817","type":"file","file":"05-Fleeting/Bit overflow.md","x":1040,"y":-1360,"width":400,"height":400},
+		{"id":"1f8b8777f7f57845","type":"file","file":"05-Fleeting/Floating-point arithmetic has different mathematical properties.md","x":720,"y":-2040,"width":400,"height":400},
+		{"id":"3b0be1f991019f13","type":"file","file":"05-Fleeting/The benefits of studying number representations.md","x":120,"y":-2040,"width":400,"height":400},
+		{"id":"6866f2d360c70dc6","type":"file","file":"05-Fleeting/Chapter 2 - Representing and Manipulating Information - How to read 💡.md","x":-220,"y":-656,"width":400,"height":400,"color":"5"}
+	],
+	"edges":[
+		{"id":"1c2aea2eb744db0d","fromNode":"93bd9864d9db3c94","fromSide":"right","toNode":"f541307dcbbd5555","toSide":"left"},
+		{"id":"380b695227ace00a","fromNode":"f541307dcbbd5555","fromSide":"top","toNode":"ccc262e813bee29e","toSide":"bottom"},
+		{"id":"812be1d72ca1a282","fromNode":"f541307dcbbd5555","fromSide":"top","toNode":"8c35445e95bd1817","toSide":"bottom"},
+		{"id":"d0a64c5a1a5d33fa","fromNode":"f541307dcbbd5555","fromSide":"top","toNode":"4c75f375eed7b8e3","toSide":"bottom"},
+		{"id":"cecbcc1a05b43ea9","fromNode":"f541307dcbbd5555","fromSide":"right","toNode":"e3e0783e0b1db259","toSide":"left"},
+		{"id":"bee5d3e3f0bfbfcd","fromNode":"ccc262e813bee29e","fromSide":"top","toNode":"3b0be1f991019f13","toSide":"bottom"},
+		{"id":"e3fa53abcd8ba587","fromNode":"ccc262e813bee29e","fromSide":"top","toNode":"1f8b8777f7f57845","toSide":"bottom"},
+		{"id":"edf2b41021477e51","fromNode":"93bd9864d9db3c94","fromSide":"top","toNode":"6866f2d360c70dc6","toSide":"bottom"}
+	]
+}
