@@ -11,3 +11,5 @@ cssclasses:
 - [[2.2.Integer Representations]]
 - [[2.3.Integer Arithmetic]]
 - [[2.4.Floating Point]]
+
+[[Chapter 2 - Practice problems]]
