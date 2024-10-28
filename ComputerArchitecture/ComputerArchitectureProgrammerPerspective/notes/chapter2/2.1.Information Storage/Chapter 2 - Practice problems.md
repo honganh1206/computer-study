@@ -93,10 +93,88 @@ Red ^ Magenta = 001 => Blue
 
 ## PP 2.10
 
-
 | Step   | `*x` | `*y`  |
 | ------ | ---- | ----- |
 | Base   | a    | b     |
 | Step 1 | a    | a ^ b |
 | Step 2 | b    | a ^ b |
 | Step 3 | b    | a     |
+
+## PP 2.11
+
+A. `first` would be 2k and `last` would be 0 in the final iteration.
+B. In the 3rd iteration as we have `first <= last`, the `first` and `last` variables will both be equal to 2, and we have `*x = *y = 3` but at that point `3^3=0` (exclusive or - if both are true then it is false) so we have the values of `*x` and `*y` reset to 0.
+C. Change `<=` to `<`
+
+
+## PP 2.12
+
+A. Usual masking `x & 0xFF`
+B. `x ^ ~0xFF`. The result of `~0xFF = 0xFFFFFF00` which flips all the bits from 0 to 1 and vice versa. In that way, the XOR operation will return the bits necessary to complement the most significant 6 bits of `x`, resulting in `0x789ABC21`
+C. `x | 0xFF`. If the least significant byte is going to be `FF` then the `0xFF` must return true. Therefore we need the OR operation to flip the least significant byte of `x = 0x87654321` to `FF`
+
+
+## PP 2.13
+
+
+```c
+// Bit set
+int bis(int x, int m) {
+  return x | m;
+};
+
+// Bit clear
+int bic(int x, int m) {
+  return x & ~m;
+};
+
+// x | y
+int bool_or(int x, int y) {
+ int result = bis(x, y);
+ return result;
+}
+
+// x ^ y
+int bool_xor(int x, int y) {
+  int result = bis(bic(x, y), bic(y, x));
+  return result;
+}
+
+```
+
+
+## PP 2.14
+
+| Expression | Value           |
+| ---------- | --------------- |
+| a          | 0x55 (01010101) |
+| b          | 0x46 (01000100) |
+| a & b      | 0x88            |
+| a && b     | 0x01            |
+| a \| b     | 0x57            |
+| a \|\| b   | 0x01            |
+| ~a \| ~b   | 0xBB            |
+| !a \|\| !b | 0x00            |
+| a & !b     | 0x00            |
+| a && ~b    | 0x01            |
+
+## PP 2.15
+
+
+```c
+// Longer way to check equal instead of x == y
+int equal(int x, int y) {
+  // If EVERY bit of x matches with every bit of y (x equal y) then x ^ y = false
+  return !(x ^ y);
+}
+```
+
+
+## PP 2.16
+
+| x    | x << 2 | x >> 3 (Logical) | x >> 3 (Arithmetic) |
+| ---- | ------ | ---------------- | ------------------- |
+| 0xD4 | 0x50   | 0x1A             | 0xFA                |
+| 0x64 | 0x90   | 0x0C             | 0x0C                |
+| 0x72 | 0xC8   | 0x0E             | 0x0E                |
+| 0x44 | 0x10   | 0x08             | 0x08                |

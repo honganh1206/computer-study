@@ -40,6 +40,20 @@ void inplace_swap(int *x, int *y) {
 
 }
 
+// This only works for even-length arrays
+// For odd-length arrays, the middle element will be set as 0
+void reverse_array(int a[], int cnt) {
+  int first, last;
+  for (first = 0, last = cnt-1; first < last; first++, last--) {
+    inplace_swap(&a[first], &a[last]);
+  }
+
+  for (int i = 0; i < cnt; i++) {
+        printf("%d ", a[i]);
+    }
+    printf("\n");
+}
+
 void test_show_bytes(int val) {
   int ival = val;
   float fval = (float) ival;
@@ -52,6 +66,31 @@ void test_show_bytes(int val) {
   show_pointer(pval);
 }
 
+// Bit set
+int bis(int x, int m) {
+  return x | m;
+};
+
+// Bit clear
+int bic(int x, int m) {
+  return x & ~m;
+};
+
+int bool_or(int x, int y) {
+ int result = bis(x, y);
+ return result;
+}
+
+int bool_xor(int x, int y) {
+  int result = bis(bic(x, y), bic(y, x));
+  return result;
+}
+
+// Longer way to check equal instead of x == y
+int equal(int x, int y) {
+  // If EVERY bit of x matches with every bit of y (x equal y) then x ^ y = false
+  return !(x ^ y);
+}
 
 int main(int argc, char *argv[])
 {
@@ -61,10 +100,21 @@ int main(int argc, char *argv[])
     // show_bytes(ap, 1); // As on WSL2, a little-endian machine
     // show_bytes(ap, 2);
     // show_bytes(ap, 3);
-
     // show_int(2607352);
     // show_float(3510593.0);
-    const char *m = "mnopqr";
-    show_bytes((byte_pointer) m, strlen(m));
+    // const char *m = "mnopqr";
+    // show_bytes((byte_pointer) m, strlen(m));
+    // int arr[] = {1,2,3,4,5};
+    // int count = sizeof(arr) / sizeof(arr[0]);
+    // reverse_array(arr, count);
+    // int x = 0b10101010; // 170
+    // int y = 0b11001100; // 204
+    // printf("bis(x, y) = %d\n", bis(x, y)); // 238
+    // printf("bic(x, y) = %d\n", bic(x, y)); // 34
+    // printf("bool_or(x, y) = %d\n", bool_or(x, y)); // 238
+    // printf("bool_xor(x, y) = %d\n", bool_xor(x, y)); // 102
+
+    int z = equal(1, 1);
+    printf("Result is %d\n", z);
     return 0;
 }
