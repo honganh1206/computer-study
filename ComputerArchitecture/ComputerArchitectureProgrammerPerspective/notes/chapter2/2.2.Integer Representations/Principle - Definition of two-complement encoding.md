@@ -22,7 +22,7 @@ $$
 
 In the figure below, the total numeric value of a bit vector is the *combination* of the leftward-pointing gray bar and the rightward-pointing blue bar:
 
-![[{60040438-9876-4230-B32F-74B155205378}.png|The values differ greatly when the most significant bit is 1]]
+![[Figure 2-13.png|The values differ greatly when the most significant bit is 1]]
 
 
 The *least representable* value given by a bit vector of $[10\dots0]$ (sign bit sets the negative weight and clear all other bits) has the integer value of $TMin_{w} \doteq -2^{w-1}$

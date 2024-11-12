@@ -21,14 +21,4 @@ ISO C99 introduces a class of data types where **the data sizes are fixed** rega
 
 [[Data type `char` as an exception]]
 
-The C language allows **a variety of ways to order keywords**:
-
-```c
-// These all share the same meaning
-unsigned long
-unsigned long int
-long unsigned
-long unsigned int
-```
-
-A pointer `char *` in C uses the *full word size* of a program. Most machines also support *two different floating-point formats* namely **single precision (`float`)** and **double precision (`double`)**
+[[Ordering keywords in C]]

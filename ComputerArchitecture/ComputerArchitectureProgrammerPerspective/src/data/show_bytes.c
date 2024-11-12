@@ -114,7 +114,32 @@ int main(int argc, char *argv[])
     // printf("bool_or(x, y) = %d\n", bool_or(x, y)); // 238
     // printf("bool_xor(x, y) = %d\n", bool_xor(x, y)); // 102
 
-    int z = equal(1, 1);
-    printf("Result is %d\n", z);
+    // int z = equal(1, 1);
+    // printf("Result is %d\n", z);
+
+    // short x = -12345; // 1001110000001100
+    // short mx = -x; // 1110001111110011
+    // short ux = 53191; // 1110001111110011
+    // show_bytes((byte_pointer) &x, sizeof(short));
+    // show_bytes((byte_pointer) &mx, sizeof(short));
+    // show_bytes((byte_pointer) &ux, sizeof(short));
+
+    // short int v = -12345;
+    // unsigned short uv = (unsigned short) v;
+    // printf("v= %d, uv = %u\n", v, uv); // Different bit interpretation
+
+    // unsigned u = 4294967295u; // UMax
+    // int tu = (int) u; // The underlying bit representation stays the same here
+    // printf("u = %u, tu = %d\n", u, tu); // u = 4294967295, tu = -1
+
+    // int x = -1;
+    // unsigned u = 2147483648;
+    // printf("x = %u = %d\n", x, x); // x = 4294967295 = -1
+    // printf("u = %u = %d\n", u, u); // u = 2147483648 = -2147483648
+
+    int s = -2147483647-1U;
+    unsigned u = -2147483647;
+    printf("Result is %i\n", s < u); // 0
+
     return 0;
 }
