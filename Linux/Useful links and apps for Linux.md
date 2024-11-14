@@ -3,6 +3,7 @@
 ```cmd
 wsl --list
 wsl --install
+wsl --unregister Ubuntu
 ```
 
 - Common issues to deal with when installing:
