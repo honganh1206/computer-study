@@ -90,7 +90,7 @@
 		{"id":"f4fb015cbdd020e4","type":"file","file":"02-Areas/Computer/ComputerArchitecture/ComputerArchitectureProgrammerPerspective/notes/chapter2/2.1.Information Storage/2.1.6.Introduction to Boolean Algebra.md","x":2714,"y":4160,"width":400,"height":400},
 		{"id":"092c3762294acf0a","type":"file","file":"02-Areas/Computer/ComputerArchitecture/ComputerArchitectureProgrammerPerspective/notes/chapter2/2.1.Information Storage/Truth table of some operations.md","x":3601,"y":3833,"width":400,"height":400},
 		{"id":"494c3bb96ef86bd2","x":-1199,"y":9595,"width":400,"height":400,"type":"file","file":"02-Areas/Computer/ComputerArchitecture/ComputerArchitectureProgrammerPerspective/notes/chapter2/2.2.Integer Representations/2.2.5.Signed vs Unsigned in C.md"},
-		{"id":"047344a9ca2be511","x":-2240,"y":9603,"width":400,"height":400,"type":"file","file":"05-Fleeting/2.2.6.Expanding the Bit Representation of a number.md"}
+		{"id":"047344a9ca2be511","x":-2240,"y":9603,"width":400,"height":400,"type":"file","file":"02-Areas/Computer/ComputerArchitecture/ComputerArchitectureProgrammerPerspective/notes/chapter2/2.2.Integer Representations/2.2.6.Expanding the Bit Representation of a number.md"}
 	],
 	"edges":[
 		{"id":"1c2aea2eb744db0d","fromNode":"93bd9864d9db3c94","fromSide":"right","toNode":"f541307dcbbd5555","toSide":"left"},
