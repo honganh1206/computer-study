@@ -16,4 +16,6 @@ Operation zero extension is when we *add leading zeros to the representation*, w
 
 [[Expansion of a two’s-complement number by sign extension]]
 
+Note that conversing data from one data size to another and between signed and unsigned can *affect the behavior of the program*. 
+
 

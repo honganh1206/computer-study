@@ -28,6 +28,14 @@ sudo nano /etc/wsl.conf
 systemd=true
 ```
 
+
+## Useful Linux commands
+
+```bash
+sudo update-alternatives --config editor # change default editor
+sudo update-alternatives --config x-terminal-emulator # change default terminal emulator
+```
+
 ## [Edit mount points at startup](https://www.reddit.com/r/PleX/comments/11jjg8e/comment/k4iwpwh/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
 
 

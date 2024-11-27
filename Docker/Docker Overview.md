@@ -34,7 +34,7 @@ sudo chmod g+w /var/run/docker.sock
 sudo gpasswd -a $USER docker
 sudo systemctl start docker
 
-# Then reload WSL2
+# Then reload WSL2 or reboot if on Linux
 ```
 ## Keeping local environment clean
 

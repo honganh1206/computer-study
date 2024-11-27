@@ -230,3 +230,27 @@ Four first entries apply to $x < 0$ case where $T 2 U_{w}(x) = x + 2^w$, and the
 | -2147483647-1U < 2147483647  | Unsigned | 0          |
 | -2147483647-1 < -2147483647  | Signed   | 0          |
 | -2147483647-1U < -2147483647 | Unsigned | 1          |
+
+## PP 2.22
+
+A. $-1 \times 2^{3}+ 1 \times 2^{2} + 0 + 0 = -4$
+B. $-1 \times 2^{4} + 1 \times 2^{3} + 1 \times 2^{2} + 0 + 0 = -4$
+C. $-1 \times 2^{5} + 1 \times 2^{4} + 1 \times 2^{3} + 1 \times 2^{2} + 0 + 0 = -4$
+
+
+## PP 2.23
+
+A.
+
+| w          | `fun1(w)` | `fun2(w)` |
+| ---------- | --------- | --------- |
+| 0x00000076 | 118       | 118       |
+| 0x87654321 | 33        | 33        |
+| 0x000000C9 | 201       | -55       |
+| 0xEDCBA987 | 135       | -121      |
+
+B. TLDR: `fun1()` allows casting AFTER both the left shift and right shift operations have been executed, while `fun2()` allows casting after the left shift is executed only. 
+
+`fun1()` shifts the left bits by 24 bits to the left, then 24 bits to the right and the casting will happen at the end. It then converts the unsigned value but at this point, the if the MSB is 0 then the number will NOT be treated as a negative number. The right shift will also be performed logically.
+
+`fun(2)` will convert the value to signed BEFORE the left shifting happens, meaning if the MSB is 1 then the value will be treated as negative. If so, the arithmetic shift will be performed when doing the right shift (filling the vacated bits on the left with 1)
