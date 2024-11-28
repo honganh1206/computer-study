@@ -253,4 +253,17 @@ B. TLDR: `fun1()` allows casting AFTER both the left shift and right shift opera
 
 `fun1()` shifts the left bits by 24 bits to the left, then 24 bits to the right and the casting will happen at the end. It then converts the unsigned value but at this point, the if the MSB is 0 then the number will NOT be treated as a negative number. The right shift will also be performed logically.
 
-`fun(2)` will convert the value to signed BEFORE the left shifting happens, meaning if the MSB is 1 then the value will be treated as negative. If so, the arithmetic shift will be performed when doing the right shift (filling the vacated bits on the left with 1)
+`fun(2)` will convert the value to signed BEFORE the left shifting happens, meaning if the MSB is 1 then the value will be treated as negative. If so, the arithmetic shift will be performed when doing the right shift (filling the vacated bits on the left with 1) 
+
+
+## PP 2.24
+
+4 bits to 3 bits
+
+| Unsigned |     | Signed |     |
+| -------- | --- | ------ | --- |
+| 1        | 1   | 1      | 1   |
+| 3        | 3   | 3      | 3   |
+| 5        | 5   | 5      | 5   |
+| 12       | 4   | -4     | 4   |
+| 14       | 6   | -2     | 6   |
