@@ -38,6 +38,15 @@ sudo update-alternatives --config x-terminal-emulator # change default terminal 
 
 ## [Edit mount points at startup](https://www.reddit.com/r/PleX/comments/11jjg8e/comment/k4iwpwh/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
 
+## Dual-booting Windows and Linux
+
+```
+# On Linux
+timedatectl set-local-rtc 1 --adjust-system-clock
+
+# On Windows
+Reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v RealTimeIsUniversal /t REG_QWORD /d 1
+```
 
 ## Cool applications to install
 

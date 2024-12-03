@@ -267,3 +267,18 @@ B. TLDR: `fun1()` allows casting AFTER both the left shift and right shift opera
 | 5        | 5   | 5      | 5   |
 | 12       | 4   | -4     | 4   |
 | 14       | 6   | -2     | 6   |
+
+## PP 2.25
+
+Using `<=` will lead to the off-by-one error: When `length = 0` the loop condition `i <= length` will cause an out-of-bounds array access.
+
+We fix this by changing the condition to `i < length`
+
+## PP 2.26
+
+A. Cases that introduce incorrect result
+1. Length of s < length of t
+2. Length of s = 0
+3. t string has an empty space
+ B. As the data type of `size_t` is `unsigned`, the abstraction yields a positive result all the times. 
+C. We cast the return value from `strlen()` to `int` to use signed values.

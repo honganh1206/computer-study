@@ -175,6 +175,60 @@ void test_truncation() {
   show_bytes((byte_pointer)&y, sizeof(int));    // Byte length 4
 }
 
+float sum_elements(float a[], unsigned length) {
+  int i;
+  float result = 0;
+  for (i = 0; i < length; i++) {
+    result += a[i];
+  }
+  return result;
+}
+
+void test_sum_elements() {
+  float test_values[] = {1.1, 2.2, 3.3};
+  size_t len = sizeof(test_values) / sizeof(test_values[0]);
+  float result = sum_elements(test_values, len);
+  printf("result = %f\n", result);
+}
+
+typedef struct {
+  char *input_s;
+  char *input_t;
+  int expected_output;
+} TestCase;
+
+int strlonger(char *s, char *t) { return (int)strlen(s) - (int)strlen(t) > 0; }
+
+void test_strlonger() {
+  TestCase test_table[] = {
+      {"hello", "hi", 1},  // Test case 1
+      {"hi", "hello", 0},  // Test case 2
+      {"abc", "def", 0},   // Test case 3
+      {"", "nonempty", 0}, // Test case 4
+      {"nonempty", "", 1}, // Test case 5
+      {"", "", 0},         // Test case 6
+      {"a ", "a", 1},      // Test case 7.1
+      {"a", "a ", 0},      // Test case 7.2
+      {"!@#$", "!@", 1},   // Test case 8
+      {"aaaaa", "aaa", 1}, // Test case 11
+      {"世界", "a", 1}     // Test case 12
+  };
+
+  int numCases = sizeof(test_table) / sizeof(test_table[0]);
+
+  for (int i = 0; i < numCases; i++) {
+    TestCase test = test_table[i];
+    int result = strlonger(test.input_s, test.input_t);
+
+    if (result == test.expected_output) {
+      printf("Test %d passed.\n", i + 1);
+    } else {
+      printf("Test %d failed. Input: ('%s', '%s'). Expected: %d. Got %d\n",
+             i + 1, test.input_s, test.input_t, test.expected_output, result);
+    }
+  }
+}
+
 int main(int argc, char *argv[]) {
   // test_show_bytes(12345);
   //  test_reverse_array();
@@ -183,6 +237,8 @@ int main(int argc, char *argv[]) {
   // test_equal();
   // test_conversion();
   // test_fun1_fun2();
-  test_truncation();
+  // test_truncation();
+  // test_sum_elements();
+  test_strlonger();
   return 0;
 }
