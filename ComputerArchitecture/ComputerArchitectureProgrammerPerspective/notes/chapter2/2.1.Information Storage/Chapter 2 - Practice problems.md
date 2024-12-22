@@ -282,3 +282,16 @@ A. Cases that introduce incorrect result
 3. t string has an empty space
  B. As the data type of `size_t` is `unsigned`, the abstraction yields a positive result all the times. 
 C. We cast the return value from `strlen()` to `int` to use signed values.
+
+
+## PP 2.28
+
+| $x$ |         | $-^{u}_{4}x$ |         |
+| --- | ------- | ------------ | ------- |
+| Hex | Decimal | Hex          | Decimal |
+| 1   | 1       | F            | 15      |
+| 4   | 4       | C            | 12      |
+| 7   | 7       | 9            | 9       |
+| A   | 10      | 6            | 6       |
+| E   | 14      | 2            | 2       |
+|     |         |              |         |

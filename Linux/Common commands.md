@@ -25,3 +25,19 @@ dpkg -i package.deb
 
 - Check all groups with `id`
 
+- Kill a process
+
+```bash
+# Using netstat to find the program
+sudo netstat -tulpn | grep :4000
+
+# Or using lsof for a detailed view
+sudo lsof -i:4000
+# Output
+tcp   0   0 0.0.0.0:4000    0.0.0.0:*    LISTEN <PID>/node
+
+# The gentle way - Send a SIGTERM signal asking the program to terminate gracefully
+kill <PID>
+# The forceful way - Send a SIGKILL signal asking the program to stop immediately without any cleaning up
+kill -9 <PID>
+```

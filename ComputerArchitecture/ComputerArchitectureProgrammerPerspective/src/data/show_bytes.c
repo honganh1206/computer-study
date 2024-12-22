@@ -195,12 +195,12 @@ typedef struct {
   char *input_s;
   char *input_t;
   int expected_output;
-} TestCase;
+} TEST_STRLONGER;
 
 int strlonger(char *s, char *t) { return (int)strlen(s) - (int)strlen(t) > 0; }
 
 void test_strlonger() {
-  TestCase test_table[] = {
+  TEST_STRLONGER test_table[] = {
       {"hello", "hi", 1},  // Test case 1
       {"hi", "hello", 0},  // Test case 2
       {"abc", "def", 0},   // Test case 3
@@ -217,7 +217,7 @@ void test_strlonger() {
   int numCases = sizeof(test_table) / sizeof(test_table[0]);
 
   for (int i = 0; i < numCases; i++) {
-    TestCase test = test_table[i];
+    TEST_STRLONGER test = test_table[i];
     int result = strlonger(test.input_s, test.input_t);
 
     if (result == test.expected_output) {
@@ -227,6 +227,45 @@ void test_strlonger() {
              i + 1, test.input_s, test.input_t, test.expected_output, result);
     }
   }
+}
+
+// PP 2.7: Determine whether arguments can be added without overflow
+int uadd_ok(unsigned x, unsigned y) {
+    unsigned sum = x + y;
+    return sum >= x;
+}
+
+typedef struct {
+    unsigned x;
+    unsigned y;
+    int expected_output;
+} TEST_UADD_OK;
+
+void test_uadd_ok() {
+    TEST_UADD_OK test_table[] = {
+        {1, 1, 1},                    // Simple addition
+        {0, 0, 1},                    // Zero case
+        {~0u, 1, 0},                 // Basic overflow case (~0u is all 1s = UINT_MAX)
+        {~0u - 5, 10, 0},            // Overflow with larger numbers
+        {~0u, 0, 1},                 // Edge case with max value
+        {0, ~0u, 1},                 // Edge case other way
+        {~0u/2, ~0u/2, 1},          // Half max values
+        {~0u/2 + 1, ~0u/2 + 1, 0}   // Just over half
+    };
+
+    int numCases = sizeof(test_table) / sizeof(test_table[0]);
+
+    for (int i = 0; i < numCases; i++) {
+        TEST_UADD_OK test = test_table[i];
+        int result = uadd_ok(test.x, test.y);
+
+        if (result == test.expected_output) {
+            printf("Test %d passed.\n", i + 1);
+        } else {
+            printf("Test %d failed. Input: (%u, %u). Expected: %d, Got: %d\n",
+                   i + 1, test.x, test.y, test.expected_output, result);
+        }
+    }
 }
 
 int main(int argc, char *argv[]) {
@@ -239,6 +278,7 @@ int main(int argc, char *argv[]) {
   // test_fun1_fun2();
   // test_truncation();
   // test_sum_elements();
-  test_strlonger();
+  // test_strlonger();
+  test_uadd_ok();
   return 0;
 }

@@ -16,7 +16,7 @@ U 2 T_{w}(u) =
 \begin{array}{rcl} 
     & u &\mbox{for} & u \leq TMax_{w} \\
     & u - 2^{w} &\mbox{for} & u > TMax_{w}
-\end{array}
+\end{array} \quad \text{(2.7)}
 $$
 
 ![[Figure 2-18.png]]

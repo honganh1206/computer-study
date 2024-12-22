@@ -57,5 +57,6 @@ Reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v RealTimeIsU
 - Tmux and [how to use it](https://hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/) and some common commands:
 	- Open a new pane vertically `Ctrl b + %`
 - Vim and [this game-based tutorial](https://vim-adventures.com/)
-
+- Vitals for GNOME (display specs)
+- Okular (Way better than any default PDF readers out there!)
 

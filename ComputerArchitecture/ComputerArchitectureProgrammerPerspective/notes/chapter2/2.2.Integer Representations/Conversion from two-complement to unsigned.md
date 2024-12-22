@@ -16,7 +16,7 @@ T 2 U_{w}(x) =
 \begin{array}{rcl} 
     & x + 2^{w} &\mbox{for} & x < 0 \\
     & x &\mbox{for} & x \geq 0
-\end{array}
+\end{array}  \quad \text{(2.5)}
 $$
 
 Example: $T 2 U_{16}(-12,345) = -12,345 + 2^{16}=53,191$ 
@@ -29,7 +29,7 @@ $$
 Note that this equation has its weighted sums for bits from $0$ to $w-2$ *cancel each other*. Therefore with $x \geq 0$ or $x < 0$ we have:
 
 $$
-B 2 U_{w}(T 2 B_{w}(x)) = T 2 U_{w}(x) = x + x_{w-1}2^w
+B 2 U_{w}(T 2 B_{w}(x)) = T 2 U_{w}(x) = x + x_{w-1}2^{w} \quad \text{(2.6)}
 $$
 
 The negative values in two’s-complement representation increase by $2^{4}=16$ with an unsigned representation.
