@@ -229,7 +229,7 @@ void test_strlonger() {
   }
 }
 
-// PP 2.7: Determine whether arguments can be added without overflow
+// PP 2.27: Determine whether arguments can be added without overflow
 int uadd_ok(unsigned x, unsigned y) {
     unsigned sum = x + y;
     return sum >= x;
@@ -268,6 +268,60 @@ void test_uadd_ok() {
     }
 }
 
+// PP 2.30
+int tadd_ok(int x, int y) {
+    int sum = x + y;
+    return !((x > 0 && y > 0 && sum <= 0) || // Positive overflow detection
+        (x < 0 && y < 0 && sum >= 0)); // Negative overflow detection
+    // return (sum-x == y) && (sum-y == x); // PP 2.31 - This is wrong because (x+y)-x still evaluates to y whether an overflow occurs or not
+}
+
+// PP 2.32 - The results will be wrong in case -y is equal to TMin. In that case, overflow will occure if x is negative.
+int tsub_ok(int x, int y) {
+    return tadd_ok(x,  -y);
+}
+
+typedef struct {
+    int x;
+    int y;
+    int expected_output;
+} TEST_TADD_OK;
+
+void test_tadd_ok() {
+    int int_max = ~(1 << 31);         // 0x7FFFFFFF
+    int int_min = (1 << 31);          // 0x80000000
+
+    TEST_TADD_OK test_table[] = {
+        {1, 1, 1},                    // Simple addition
+        {0, 0, 1},                    // Zero case
+        {int_max, 1, 0},              // Positive overflow
+        {int_min, -1, 0},             // Negative overflow
+        {int_max - 1, 1, 1},          // Just below positive overflow
+        {int_min + 1, -1, 1},         // Just below negative overflow
+        {int_max/2, int_max/2, 1},    // Large positive numbers that don't overflow
+        {int_min/2, int_min/2, 1},    // Large negative numbers that don't overflow
+        {int_max, -1, 1},             // Mixed signs, no overflow
+        {int_min, 1, 1},              // Mixed signs, no overflow
+        {int_max, int_max, 0},        // Guaranteed overflow with two max values
+        {int_min, int_min, 0}         // Guaranteed overflow with two min values
+    };
+
+    int numCases = sizeof(test_table) / sizeof(test_table[0]);
+
+    for (int i = 0; i < numCases; i++) {
+        TEST_TADD_OK test = test_table[i];
+        int result = tadd_ok(test.x, test.y); // Could be replaced with tsub_ok()
+
+        if (result == test.expected_output) {
+            printf("Test %d passed.\n", i + 1);
+        } else {
+            printf("Test %d failed. Input: (%d, %d). Expected: %d, Got: %d\n",
+                   i + 1, test.x, test.y, test.expected_output, result);
+        }
+    }
+}
+
+
 int main(int argc, char *argv[]) {
   // test_show_bytes(12345);
   //  test_reverse_array();
@@ -279,6 +333,7 @@ int main(int argc, char *argv[]) {
   // test_truncation();
   // test_sum_elements();
   // test_strlonger();
-  test_uadd_ok();
+  // test_uadd_ok();
+  test_tadd_ok();
   return 0;
 }

@@ -11,3 +11,6 @@ hexadecimal (or simple “hex”) uses **digits from 0 to 9** along with **chara
 
 If written in hexadecimal, the value of an single byte can range from **00<sub>16</sub> to FF<sub>16</sub>**
 
+Bonus: 5-bit hexadecimal values
+
+![[5-bit hexadecimal values.png]]

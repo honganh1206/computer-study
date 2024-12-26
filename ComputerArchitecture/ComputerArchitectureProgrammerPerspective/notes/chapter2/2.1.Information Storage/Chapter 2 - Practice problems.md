@@ -295,3 +295,35 @@ C. We cast the return value from `strlen()` to `int` to use signed values.
 | A   | 10      | 6            | 6       |
 | E   | 14      | 2            | 2       |
 |     |         |              |         |
+
+## PP 2.29
+
+Refer to the 5-bit hexadecimal value table in [[What hexadecimal numbers are]]
+
+Note that $x, y$ here are *negative* if the higher order bit is 1
+
+| $x$       | $y$       | $x+y$      | $x +^t_{5} \\ y$ | Case |
+| --------- | --------- | ---------- | ---------------- | ---- |
+| -8        | -8        | -16        | -16              | 1    |
+| `[11000]` | `[11000]` | `[110000]` | `[10000]`        |      |
+| -9        | 8         | -1         | -1               | 2    |
+| `[10111]` | `[01000]` | `[111111]` | `[11111]`        |      |
+| 2         | 5         | 7          | 7                | 3    |
+| `[00010]` | `[00101]` | `[000111]` | `[00111]`        |      |
+| 12        | 4         | 16         | -16              | 4    |
+| `[01100]` | `[00100]` | `[010000]` | `[10000]`        |      |
+
+## PP 2.33
+
+The bit patterns are the same as for unsigned negation in PP 2.28
+
+Note that in two's-complement interpretation, the MSB is a negative number so while B in unsigned is 11, it is -5 in two's-complement.
+
+| $x$ |         | $-^t_4 x$ |     |
+| --- | ------- | --------- | --- |
+| Hex | Decimal | Decimal   | Hex |
+| 2   | 2       | -2        | E   |
+| 3   | 3       | -3        | D   |
+| 9   | 9       | -9        | 7   |
+| B   | -5      | 5         | 5   |
+| C   | -4      | 4         | 4   |

@@ -25,7 +25,7 @@ In the figure below, the total numeric value of a bit vector is the *combination
 ![[Figure 2-13.png|The values differ greatly when the most significant bit is 1]]
 
 
-The *least representable* value given by a bit vector of $[10\dots0]$ (sign bit sets the negative weight and clear all other bits) has the integer value of $TMin_{w} \doteq -2^{w-1}$
+The *least representative* value given by a bit vector of $[10\dots0]$ (sign bit sets the negative weight and clear all other bits) has the integer value of $TMin_{w} \doteq -2^{w-1}$
 
 Meanwhile, the *greatest value* given by a bit vector of $[01\dots1]$ (clear all the sign bit and set others) has the integer value of $TMax_{w}\doteq \sum_{i=0}^{w-2}2^{i}$
 
