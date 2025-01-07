@@ -21,3 +21,8 @@ services to the user*
   - [[Hardware Faults]]
   - [[Software Errors]]
   - [[Human Errors]]
+
+  ## How important is Reliability?
+
+  - Mundane applications must also work reliably! Not just nuclear power stations or air traffic control software.
+  - While sometimes we might reduce reliability to favor speed, we must be aware of the corners we are cutting.
