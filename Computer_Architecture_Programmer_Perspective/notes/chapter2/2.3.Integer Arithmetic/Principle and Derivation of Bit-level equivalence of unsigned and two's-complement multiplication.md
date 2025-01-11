@@ -1,8 +1,8 @@
-Tags: #review #computer #study 
+Tags: #review #computer #study
 
 ## Principle
 
-Let $\vec{x}, \vec{y}$ be bit vectors of length $w$, integers $x, y$ represented by these bit vectors in two's-complement form will be $x = \text{B2T}_{w}(\vec{x})$ and $y=\text{B2T}_{w}(\vec{y})$. 
+Let $\vec{x}, \vec{y}$ be bit vectors of length $w$, integers $x, y$ represented by these bit vectors in two's-complement form will be $x = \text{B2T}_{w}(\vec{x})$ and $y=\text{B2T}_{w}(\vec{y})$.
 
 Non-negative integers $x', y'$ representing these bit vectors will be $x' = \text{B2U}_{w}(\vec{x})$ and $y'=\text{B2U}_{w}(\vec{y})$/ Then we will have:
 
@@ -12,8 +12,8 @@ $$
 
 The unsigned truncated product always equals $(x\times y)\text{mod}~8$
 
-The table below shows the result of *multiplying different 3-bit numbers then truncating it to 3-bit numbers* (remove the first 3 bits?)
-
+The table below shows the result of _multiplying different 3-bit numbers then truncating it to 3-bit numbers_ (remove the first 3 bits?)
+   
 | Mode             | $x$ |         | $y$ |         | $x \times y$ |            | Truncated $x \times y$ |         |
 | ---------------- | --- | ------- | --- | ------- | ------------ | ---------- | ---------------------- | ------- |
 | Unsigned         | 5   | `[101]` | 3   | `[011]` | 15           | `[001111]` | 7                      | `[111]` |
@@ -36,7 +36,7 @@ $$
 \quad \text{(2.18)}
 $$
 
-Note that the weights $2^{w}$ and $2^{2w}$ drop out due to *the modulus operator*. 
+Note that the weights $2^{w}$ and $2^{2w}$ drop out due to _the modulus operator_.
 
 From equation 2.17 in [[2.3.5 Two-Complement Multiplication]] we also have this:
 
@@ -44,8 +44,9 @@ $$
 \text{T2U}_{w}(x~*^{t}_{w}~y) = \text{T2U}_{w}(\text{U2T}_{w}(x\times y)\text{mod}~2^{w}) = (x\times y)\text{mod}~2^{w}
 $$
 
-The $\text{T2U}_{w}$ and $\text{U2T}_{w}$ cancel each other out. 
+The $\text{T2U}_{w}$ and $\text{U2T}_{w}$ cancel each other out.
 
 Combining equation 2.16 and 2.18 and then applying $\text{U2B}_{w}$ to have this:
 
 $$\text{U2B}_{w}(\text{T2U}_{w}(x~*^{t}_{w}~y)) = \text{T2B}_{w}(x~*^{t}_{w}~y)=\text{U2B}_{w}(x'~*^{u}_{w}~y')$$
+

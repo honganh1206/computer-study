@@ -1,10 +1,11 @@
 # Thinking About Data Systems
 
 - A data-intensive application is built from standard building blocks like:
+
   - **Databases**: Store data
   - **Caches**: Remember the result of an expensive operation
   - **Search indexes**: Allow users to search data by keywords/filters
-  - **Stream processing**: Send a message to another process to be handled *asynchronously* 
+  - **Stream processing**: Send a message to another process to be handled _asynchronously_
   - **Batch processing**: Periodically crunch a large amount of accumulated data
 
 - Despite the variety of technologies, we still need to figure out which tools and which approaches are the **most appropriate** for the task at hand.
@@ -15,17 +16,16 @@
 
 ![[Figure 1-1.png]]
 
-- You can see from [[Figure 1-1.png]] that you have *created a new, special-purpose data data system from smaller, general-purpose data systems* and thus *you are a data system engineer too!*
-
+- You can see from [[Figure 1-1.png]] that you have _created a new, special-purpose data data system from smaller, general-purpose data systems_ and thus _you are a data system engineer too!_
 - Questions may arise: How to ensure correct data? How to provide good
-performance with degraded system parts? How to scale to handle more load? These
-all depend much on **the situation**
+  performance with degraded system parts? How to scale to handle more load? These
+  all depend much on **the situation**
 
 - Three most important aspects of any software systems:
 
 1. [[Reliability]] ensures the system to work **correctly** in the face of
    adversity.
-2. [[Scalability]] ensures we have *ways to deal with the growth of our
-   systems*.
+2. [[Scalability]] ensures we have _ways to deal with the growth of our
+   systems_.
 3. [[Maintainability]] ensures the people working on the system can maintain its
    current behaviors and develop new features.
