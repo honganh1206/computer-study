@@ -231,86 +231,140 @@ void test_strlonger() {
 
 // PP 2.27: Determine whether arguments can be added without overflow
 int uadd_ok(unsigned x, unsigned y) {
-    unsigned sum = x + y;
-    return sum >= x;
+  unsigned sum = x + y;
+  return sum >= x;
 }
 
 typedef struct {
-    unsigned x;
-    unsigned y;
-    int expected_output;
+  unsigned x;
+  unsigned y;
+  int expected_output;
 } TEST_UADD_OK;
 
 void test_uadd_ok() {
-    TEST_UADD_OK test_table[] = {
-        {1, 1, 1},                    // Simple addition
-        {0, 0, 1},                    // Zero case
-        {~0u, 1, 0},                 // Basic overflow case (~0u is all 1s = UINT_MAX)
-        {~0u - 5, 10, 0},            // Overflow with larger numbers
-        {~0u, 0, 1},                 // Edge case with max value
-        {0, ~0u, 1},                 // Edge case other way
-        {~0u/2, ~0u/2, 1},          // Half max values
-        {~0u/2 + 1, ~0u/2 + 1, 0}   // Just over half
-    };
+  TEST_UADD_OK test_table[] = {
+      {1, 1, 1},             // Simple addition
+      {0, 0, 1},             // Zero case
+      {~0u, 1, 0},           // Basic overflow case (~0u is all 1s = UINT_MAX)
+      {~0u - 5, 10, 0},      // Overflow with larger numbers
+      {~0u, 0, 1},           // Edge case with max value
+      {0, ~0u, 1},           // Edge case other way
+      {~0u / 2, ~0u / 2, 1}, // Half max values
+      {~0u / 2 + 1, ~0u / 2 + 1, 0} // Just over half
+  };
 
-    int numCases = sizeof(test_table) / sizeof(test_table[0]);
+  int numCases = sizeof(test_table) / sizeof(test_table[0]);
 
-    for (int i = 0; i < numCases; i++) {
-        TEST_UADD_OK test = test_table[i];
-        int result = uadd_ok(test.x, test.y);
+  for (int i = 0; i < numCases; i++) {
+    TEST_UADD_OK test = test_table[i];
+    int result = uadd_ok(test.x, test.y);
 
-        if (result == test.expected_output) {
-            printf("Test %d passed.\n", i + 1);
-        } else {
-            printf("Test %d failed. Input: (%u, %u). Expected: %d, Got: %d\n",
-                   i + 1, test.x, test.y, test.expected_output, result);
-        }
+    if (result == test.expected_output) {
+      printf("Test %d passed.\n", i + 1);
+    } else {
+      printf("Test %d failed. Input: (%u, %u). Expected: %d, Got: %d\n", i + 1,
+             test.x, test.y, test.expected_output, result);
     }
+  }
 }
 
 // PP 2.30
 int tadd_ok(int x, int y) {
-    int sum = x + y;
-    return !((x > 0 && y > 0 && sum <= 0) || // Positive overflow detection
-        (x < 0 && y < 0 && sum >= 0)); // Negative overflow detection
-    // return (sum-x == y) && (sum-y == x); // PP 2.31 - This is wrong because (x+y)-x still evaluates to y whether an overflow occurs or not
+  int sum = x + y;
+  return !((x > 0 && y > 0 && sum <= 0) || // Positive overflow detection
+           (x < 0 && y < 0 && sum >= 0));  // Negative overflow detection
+  // return (sum-x == y) && (sum-y == x); // PP 2.31 - This is wrong because
+  // (x+y)-x still evaluates to y whether an overflow occurs or not
 }
 
-// PP 2.32 - The results will be wrong in case -y is equal to TMin. In that case, overflow will occure if x is negative.
-int tsub_ok(int x, int y) {
-    return tadd_ok(x,  -y);
+// PP 2.32 - The results will be wrong in case -y is equal to TMin. In that
+// case, overflow will occure if x is negative.
+int tsub_ok(int x, int y) { return tadd_ok(x, -y); }
+
+typedef struct {
+  int x;
+  int y;
+  int expected_output;
+} TEST_TADD_OK;
+
+void test_tadd_ok() {
+  int int_max = ~(1 << 31); // 0x7FFFFFFF
+  int int_min = (1 << 31);  // 0x80000000
+
+  TEST_TADD_OK test_table[] = {
+      {1, 1, 1},            // Simple addition
+      {0, 0, 1},            // Zero case
+      {int_max, 1, 0},      // Positive overflow
+      {int_min, -1, 0},     // Negative overflow
+      {int_max - 1, 1, 1},  // Just below positive overflow
+      {int_min + 1, -1, 1}, // Just below negative overflow
+      {int_max / 2, int_max / 2,
+       1}, // Large positive numbers that don't overflow
+      {int_min / 2, int_min / 2,
+       1},                   // Large negative numbers that don't overflow
+      {int_max, -1, 1},      // Mixed signs, no overflow
+      {int_min, 1, 1},       // Mixed signs, no overflow
+      {int_max, int_max, 0}, // Guaranteed overflow with two max values
+      {int_min, int_min, 0}  // Guaranteed overflow with two min values
+  };
+
+  int numCases = sizeof(test_table) / sizeof(test_table[0]);
+
+  for (int i = 0; i < numCases; i++) {
+    TEST_TADD_OK test = test_table[i];
+    int result = tadd_ok(test.x, test.y); // Could be replaced with tsub_ok()
+
+    if (result == test.expected_output) {
+      printf("Test %d passed.\n", i + 1);
+    } else {
+      printf("Test %d failed. Input: (%d, %d). Expected: %d, Got: %d\n", i + 1,
+             test.x, test.y, test.expected_output, result);
+    }
+  }
+}
+
+int tmult_ok(int x, int y) {
+  int p = x * y;
+  return !x || p / x == y;
 }
 
 typedef struct {
     int x;
     int y;
     int expected_output;
-} TEST_TADD_OK;
+} TEST_TMULT_OK;
 
-void test_tadd_ok() {
-    int int_max = ~(1 << 31);         // 0x7FFFFFFF
-    int int_min = (1 << 31);          // 0x80000000
+void test_tmult_ok() {
+    int int_max = ~(1 << 31);  // 0x7FFFFFFF
+    int int_min = (1 << 31);   // 0x80000000
 
-    TEST_TADD_OK test_table[] = {
-        {1, 1, 1},                    // Simple addition
-        {0, 0, 1},                    // Zero case
-        {int_max, 1, 0},              // Positive overflow
-        {int_min, -1, 0},             // Negative overflow
-        {int_max - 1, 1, 1},          // Just below positive overflow
-        {int_min + 1, -1, 1},         // Just below negative overflow
-        {int_max/2, int_max/2, 1},    // Large positive numbers that don't overflow
-        {int_min/2, int_min/2, 1},    // Large negative numbers that don't overflow
-        {int_max, -1, 1},             // Mixed signs, no overflow
-        {int_min, 1, 1},              // Mixed signs, no overflow
-        {int_max, int_max, 0},        // Guaranteed overflow with two max values
-        {int_min, int_min, 0}         // Guaranteed overflow with two min values
+    TEST_TMULT_OK test_table[] = {
+        {0, 0, 1},              // Zero multiplication
+        {1, 1, 1},              // Simple multiplication
+        {-1, -1, 1},            // Negative numbers, no overflow
+        {2, 3, 1},              // Small positive numbers
+        {-2, -3, 1},            // Small negative numbers
+        {int_max, 1, 1},        // Max value times 1
+        {int_min, 1, 1},        // Min value times 1
+        {int_max, 2, 0},        // Overflow with max value
+        {int_min, 2, 0},        // Overflow with min value
+        {46340, 46340, 0},      // sqrt(INT_MAX), should overflow
+        {-46340, -46340, 0},    // Negative numbers causing overflow
+        {int_max, int_max, 0},  // Max * Max, definite overflow
+        {int_min, int_min, 0},  // Min * Min, definite overflow
+        {0, int_max, 1},        // Zero times max value
+        {0, int_min, 1},        // Zero times min value
+        {1000, 1000, 1},        // Medium sized numbers, no overflow
+        {-1000, 1000, 1},       // Mixed signs, no overflow
+        {46340, 46339, 1},      // Just below overflow threshold
+        {-46340, 46339, 1},     // Mixed signs, near overflow threshold
     };
 
     int numCases = sizeof(test_table) / sizeof(test_table[0]);
 
     for (int i = 0; i < numCases; i++) {
-        TEST_TADD_OK test = test_table[i];
-        int result = tadd_ok(test.x, test.y); // Could be replaced with tsub_ok()
+        TEST_TMULT_OK test = test_table[i];
+        int result = tmult_ok(test.x, test.y);
 
         if (result == test.expected_output) {
             printf("Test %d passed.\n", i + 1);
@@ -320,7 +374,6 @@ void test_tadd_ok() {
         }
     }
 }
-
 
 int main(int argc, char *argv[]) {
   // test_show_bytes(12345);
@@ -334,6 +387,7 @@ int main(int argc, char *argv[]) {
   // test_sum_elements();
   // test_strlonger();
   // test_uadd_ok();
-  test_tadd_ok();
+  // test_tadd_ok();
+  test_tmult_ok();
   return 0;
 }

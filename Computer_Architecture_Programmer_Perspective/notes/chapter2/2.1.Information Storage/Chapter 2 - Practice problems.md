@@ -339,4 +339,12 @@ Note that in two's-complement interpretation, the MSB is a negative number so wh
 | Unsigned         | 6   | `[110]` | 6   | `[110]` | 36           | `[100100]` | 4                      | `[100]` |
 | Two's-complement | -2  | `[110]` | -2  | `[110]` | 4            | `[000100]` | -4                     | `[100]` |
 
- 
+## PP 2.35 
+
+We know that when we do multiplication for two n-bit integers, our machines *truncate* the result to `n` bits from `2n` bits 
+
+Let us have $P_{true} = x \times y$ and $p = x \times_{m} y$ where $\times_{m}$ represents *machine multiplication*
+
+Due to truncation, we can write: $P_{true} = p + t\times 2^{w}$ with $t$ as some integer and $2^{w}$ as the maximum value + 1 for $w$ bits
+
+If there is no overflow, then $t=0$ and $P_{true} = p$ and if there is an overflow, $t\neq 0$ and $p$ represents the **lower $w$ bits of $P_{true}$**
