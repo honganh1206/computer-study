@@ -65,3 +65,6 @@ C supports **automatic type conversion**: If an `int` operand is combined with a
 
 > [!WARNING] Pre- versus Post-increment
 > The operators `++variable` and `variable++` behave differently: The former one increments `variable` first then use its value, while the latter one use the value first then increment it.
+
+> [!TIP]
+> Write separate statements for the order you want. Instead of `y= ++x + 1;` we can wrte it into two separate statements `x++; y = x + 1;`
