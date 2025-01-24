@@ -15,6 +15,8 @@ A **statically declared array** has the total capacity fixed and it is defined w
 
 In C we have to _specify the type and capacity at the point of variable declaration_ like `int arr[10];`
 
+[Arrays decaying to pointers](01-Areas/Computer/Dive_Into_Systems/notes/chapter1/Arrays%20decaying%20to%20pointers.md)
+
 > [!IMPORTANT]
 > C does not have `len()` function like Python, so the programmer has to _explicitly keep track of elements in the array_
 

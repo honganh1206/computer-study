@@ -7,6 +7,8 @@ tags: []
 
 # How structs work with the compiler
 
+TLDR: When you declare a struct variable, the compiler allocates some memory to it. The value of a struct is the **actual data stored in that memory block**. All members of a struct are _stored directly in the memory_ allocated to the struct variable
+
 Only the struct variable's fields (the areas in boxes) are stored in memory
 
 Fields are simply **storage locations** or _offsets_ from the start of the struct variable's memory. When looking at the example below, note that to access the field name `gpa`, the compiler must _skip past the array `name`, and one integer `age`_
@@ -42,7 +44,7 @@ Memory Address:     0      64     68     72
 
 ```
 
-0rder of accessing `gpa`: Start at the base address of the student variable -> Skip 64 bytes of the `name` field -> Skip past 4 bytes of the `age` field -> Access the memory at the location with offset = 68 bytes
+The order of accessing `gpa`: Start at the base address of the student variable -> Skip 64 bytes of the `name` field -> Skip past 4 bytes of the `age` field -> Access the memory at the location with offset = 68 bytes
 
 ```c
 struct studentT student;

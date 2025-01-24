@@ -8,20 +8,28 @@ void test_arr_update(int a[], int size) {
   printf("Address stored in parameter 'a': %p\n", (void *)a);
 }
 
-int main() {
-  int arr[5], n = 5, i;
-  for (i = 0; i < n; i++) {
-    arr[i] = i;
+void printArray(int *arr, int size) {
+  for (int i = 0; i < size; i++) {
+    printf("%d ", arr[i]);
   }
+}
+int main() {
+  // int arr[5], n = 5, i;
+  // for (i = 0; i < n; i++) {
+  //   arr[i] = i;
+  // }
 
-  printf("%d %d\n", arr[3], n); // 3 5
+  // printf("%d %d\n", arr[3], n); // 3 5
 
-  // Value get passed is the base address here
-  // Parameter a refers to the same array storage locations as its argument, arr
-  test_arr_update(arr, n);
+  // // Value get passed is the base address here
+  // // Parameter a refers to the same array storage locations as its argument,
+  // arr test_arr_update(arr, n);
 
-  // The array's 4th element will be modified however
-  printf("%d %d\n", arr[3], n); // 8 5
+  // // The array's 4th element will be modified however
+  // printf("%d %d\n", arr[3], n); // 8 5
 
-  printf("Address of array 'arr': %p\n", (void *)arr);
+  // printf("Address of array 'arr': %p\n", (void *)arr);
+  int arr[5] = {1, 2, 3, 4, 5};
+  printArray(arr, 5); // arr decays to a pointer
+  return 0;
 }

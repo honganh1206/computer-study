@@ -6,6 +6,10 @@ tags: []
 
 # By the C, by the beautiful C
 
+> [!NOTE] Summary
+> C shares some language features with high-level imperative and OOP languages
+> C arrays and strings are a lower-level abstraction than Python's lists and strings
+
 This chapter focuses on **introducing C programming to anyone with basic programming experience**
 
 > [!IMPORTANT]
