@@ -1,3 +1,9 @@
+---
+id: Thinking About Data Systems
+aliases: []
+tags: []
+---
+
 # Thinking About Data Systems
 
 - A data-intensive application is built from standard building blocks like:
@@ -23,9 +29,6 @@
 
 - Three most important aspects of any software systems:
 
-1. [[Reliability]] ensures the system to work **correctly** in the face of
-   adversity.
-2. [[Scalability]] ensures we have _ways to deal with the growth of our
-   systems_.
-3. [[Maintainability]] ensures the people working on the system can maintain its
-   current behaviors and develop new features.
+1. [Reliability](01-Areas/Computer/System%20Design/DDIA/Chapter%201/Reliability.md) ensures the system to work **correctly** in the face of adversity.
+2. [Scalability](01-Areas/Computer/System%20Design/DDIA/Chapter%201/Scalability.md) ensures we have _ways to deal with the growth of our systems_.
+3. [Maintainability](01-Areas/Computer/System%20Design/DDIA/Chapter%201/Maintainability.md) ensures the people working on the system can maintain its current behaviors and develop new features.
