@@ -13,6 +13,6 @@ Thus it is advised to _design software in such a way that minimize the pain duri
 
 [Operatability](01-Areas/Computer/System%20Design/DDIA/Chapter%201/Operatability.md)
 
-Simplicity
+[Simplicity](01-Areas/Computer/System%20Design/DDIA/Chapter%201/Simplicity.md)
 
-Evolvability
+[Evolvability](01-Areas/Computer/System%20Design/DDIA/Chapter%201/Evolvability.md)

@@ -8,11 +8,11 @@ tags: []
 
 [[Chapter 0 - Introduction]]
 
-[[Chapter 1 - Introduction to C programming]]
+[Chapter 1 - Introduction to C programming](01-Areas/Computer/Dive_Into_Systems/notes/chapter1/Chapter%201%20-%20Introduction%20to%20C%20programming.md)
 
 C programming basics like compiling and running
 
-[Chapter 2 - A deeper dive into C programming](url)
+[Chapter 2 - A deeper dive into C programming](01-Areas/Computer/Dive_Into_Systems/notes/chapter2/Chapter%202%20-%20A%20deeper%20dive%20into%20C%20programming.md)
 
 **Most** of the C language, notably pointers and dynamic memory
 

@@ -57,7 +57,7 @@ strcpy(student2.name, "Frances Allen");
 
 ## Passing structs to functions
 
-In C, arguments of **ALL** types are _passed by value_ to functions. That means when we pass a struct argument, the argument's value is passed to the function's parameter, and **the parameter gets a COPY of ours argument's value**
+In C, arguments of **ALL** types are _[passed by value](../chapter2/Pass by value.md)_ to functions. That means when we pass a struct argument, the argument's value is passed to the function's parameter, and **the parameter gets a COPY of ours argument's value**
 
 > [!IMPORTANT] > **TLDR**: If a function changes field values of a struct parameter, the corresponding field values of the argument _remain unchanged_
 > Changes to the parameter's fields only modify values in the parameter's memory locations for those fields. That is, the argument's memory locations for those fields remain unchanged.
