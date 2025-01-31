@@ -13,7 +13,7 @@ The most basic form is a **one-dimensional array**
 
 A **statically declared array** has the total capacity fixed and it is defined when the array variable is declared
 
-In C we have to _specify the type and capacity at the point of variable declaration_ like `int arr[10];`
+In C (for statically-declared array) we have to _specify the type and capacity at the point of variable declaration_ like `int arr[10];`
 
 [Arrays decaying to pointers](01-Areas/Computer/Dive_Into_Systems/notes/chapter1/Arrays%20decaying%20to%20pointers.md)
 
