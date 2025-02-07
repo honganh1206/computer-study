@@ -19,3 +19,5 @@ Goals
 [2-3-Pointers and Functions](01-Areas/Computer/Dive_Into_Systems/notes/chapter2/2-3-Pointers%20and%20Functions.md)
 
 [2-4-Dynamic Memory Allocation](01-Areas/Computer/Dive_Into_Systems/notes/chapter2/2-4-Dynamic%20Memory%20Allocation.md)
+
+[2-5-Arrays in C](01-Areas/Computer/Dive_Into_Systems/notes/chapter2/2-5-Arrays%20in%20C.md)

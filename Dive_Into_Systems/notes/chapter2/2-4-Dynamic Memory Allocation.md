@@ -21,3 +21,5 @@ DMA _grants flexibility_ to programs that:
 [malloc and free](01-Areas/Computer/Dive_Into_Systems/notes/chapter2/malloc%20and%20free.md)
 
 [Dynamically allocated arrays and strings](01-Areas/Computer/Dive_Into_Systems/notes/chapter2/Dynamically%20allocated%20arrays%20and%20strings.md)
+
+[Pointers to Heap Memory and Functions](01-Areas/Computer/Dive_Into_Systems/notes/chapter2/Pointers%20to%20Heap%20Memory%20and%20Functions.md)

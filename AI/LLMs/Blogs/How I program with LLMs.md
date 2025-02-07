@@ -29,3 +29,18 @@ Give an LLM specific objective and all background material so it can craft a wel
 
 1. Avoid creating situations with so much complexity and ambiguity. Start a request with a blank slate
 2. Ask for work that is easy to verify. Something like "Rewrite all of the new tests with <a new concept so that the tests are easier to read>". Redoing work is extremely cheap with LLMs
+
+Ideal task for an LLM: **Retrieve information about common libraries**
+
+> [!WARNING]
+> ALWAYS pass an LLM's code through a compiler (well obviously) and run the tests
+
+## Extra code structure is much cheaper?
+
+There will be tradeoffs we make every day as we write, read and refactor code.
+
+The same goes for LLMs: Small packages of code give LLMs complete and isolated context for a piece of work, while big packages help us with less typing to specify the context
+
+> [!TIP]
+> Use LLM code generation as a form of **specialized search** by asking it to include references
+> Use imperative sentences in the prompt e.g., "In the tests, implement the simplest, most readable version of the standard code for quartiles over a fixed set of known values in a slice."

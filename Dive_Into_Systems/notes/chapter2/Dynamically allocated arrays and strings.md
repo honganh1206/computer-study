@@ -12,6 +12,8 @@ tags: []
 
 A successful call to `malloc` can allocate [one contiguous chunk of heap memory](./Heap memory.md). The return value from `malloc` is _the address of the start of this chunk of memory_ aka the **base address** of a dynamically allocated array in heap memory, which also _the address of the 1st element of the array_
 
+[Why the base address of a dynamically allocated array is also the address of the first element](01-Areas/Computer/Dive_Into_Systems/notes/chapter2/Why%20the%20base%20address%20of%20a%20dynamically%20allocated%20array%20is%20also%20the%20address%20of%20the%20first%20element.md)
+
 How much to request: Total number of bytes in each array element X Number of elements in the array
 
 ```c

@@ -35,3 +35,5 @@ A pointer variable `ptr` on the `Stack` stores the address of dynamically alloca
 > Heap memory is **anonymous memory**: Addresses in the heap are NOT bound to variable names, as programs variables are allocated on the `Stack` or the data part of program memory
 
 A local pointer variable on the stack or a global one can _store the address of an anonymous heap memory location_. We can then dereference such a pointer to store data in the heap
+
+[Heap memory management](01-Areas/Computer/Dive_Into_Systems/notes/chapter2/Heap%20memory%20management.md)

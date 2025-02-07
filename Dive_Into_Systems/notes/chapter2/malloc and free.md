@@ -49,3 +49,9 @@ Also we should set the pointer variable to `NULL` after calling `free` to avoid 
 free(p);
 p = NULL;
 ```
+
+# Odd: Why `free` expects only the address of the heap space without needing the size of the heap space?
+
+Answer: `malloc` also allocates **a few additional bytes** right before the allocated chunk to store a **header structure**
+
+As the structure stores metadata about the allocated chunk, the implementation of `free` can get the size from the header that is _in memory right before the allocated chunk_
