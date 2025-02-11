@@ -2,7 +2,7 @@
 id: How I program with LLMs
 aliases: []
 tags:
-  -  #LLM
+  - #LLM
 ---
 
 # How I program with LLMs
@@ -44,3 +44,16 @@ The same goes for LLMs: Small packages of code give LLMs complete and isolated c
 > [!TIP]
 > Use LLM code generation as a form of **specialized search** by asking it to include references
 > Use imperative sentences in the prompt e.g., "In the tests, implement the simplest, most readable version of the standard code for quartiles over a fixed set of known values in a slice."
+
+## Better tests and less DRY
+
+There has been a more tempered approach to writing code: It is better to **reimplement a concept** if the cost of sharing the implementation is higher than the cost of implementing + maintaining separate code
+
+Imagine you're working on a large software project that requires multiple features. The existing implementation might have most of these features, but it's too expensive or complex to manage all aspects in one package. Instead, writing smaller, focused implementations for each feature separately can reduce the overall cost and effort compared to reimplementing everything at once.
+
+But now the tradeoffs have shifted: We now use LLMs to write the fuzz test implementation that we need but do not have the time
+
+A future: More specialized code, fewer generalized packages, and more readable tests.
+
+> [!TIP] How to solve a problem
+> Solve a particular problem then expand slowly. Do not overgeneralize the solution.
