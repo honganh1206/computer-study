@@ -8,3 +8,7 @@ tags: []
 # Relational Model vs Document Model
 
 [[About SQL]]
+
+[[The birth of NoSQL]]
+
+[[The Object-Relational Mismatch]]

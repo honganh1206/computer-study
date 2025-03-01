@@ -13,7 +13,7 @@ Only the struct variable's fields (the areas in boxes) are stored in memory
 
 Fields are simply **storage locations** or _offsets_ from the start of the struct variable's memory. When looking at the example below, note that to access the field name `gpa`, the compiler must _skip past the array `name`, and one integer `age`_
 
-```
+```js
 student1:
 +-----------+-----------------------------------+
 | Field     | Stored values (memory space)     |
@@ -33,7 +33,7 @@ Think of it this way:
 - A struct is like a _blueprint_, and it tells the compiler to organize pieces of data in a **consecutive** block of memory large enough to hold all the field
 - Each field is an offset (an address relative to the starting point of the structure) and they are laid out **sequentially**
 
-```
+```js
 Memory Address:     0      64     68     72
                    |      |      |      |
                    v      v      v      v

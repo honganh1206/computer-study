@@ -7,7 +7,9 @@ tags: []
 
 # 5-3-Structs in C
 
-A way to create a collection of data elements of **different types**: A `struct` provides a _level of abstraction_ on top of individual data values, treating them as a **single type** and the whole block is treated as a **single unit**
+A way to create a collection of data elements of **different types**
+
+A `struct` provides a _level of abstraction_ on top of individual data values, treating them as a **single type** and the whole block is treated as a **single unit**
 
 Structs in C are **value types**.
 
@@ -55,9 +57,4 @@ strcpy(student2.name, "Frances Allen");
  // change one field value
 ```
 
-## Passing structs to functions
-
-In C, arguments of **ALL** types are _[passed by value](../chapter2/Pass by value.md)_ to functions. That means when we pass a struct argument, the argument's value is passed to the function's parameter, and **the parameter gets a COPY of ours argument's value**
-
-> [!IMPORTANT] > **TLDR**: If a function changes field values of a struct parameter, the corresponding field values of the argument _remain unchanged_
-> Changes to the parameter's fields only modify values in the parameter's memory locations for those fields. That is, the argument's memory locations for those fields remain unchanged.
+[[Passing structs to functions]]
