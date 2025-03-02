@@ -141,7 +141,7 @@ void *custom_malloc(size_t size) {
       block = request_space(last, size);
       if (!block) {
         return NULL;
-      } else { // Found free block
+      } else { // Found free block, occupy it then
         // TODO: Consider splitting blocks here
         block->free = 0;
         block->magic = 0x77777777;
@@ -194,7 +194,8 @@ void *custom_realloc(void *ptr, size_t size) {
     return ptr;
   }
 
-  // Given size smaller than prior size => Allocate a smaller block and fit data into it
+  // Given size smaller than prior size => Allocate a smaller block and fit data
+  // into it
   void *new_ptr;
   new_ptr = custom_malloc(size);
   if (!new_ptr) {
@@ -203,6 +204,18 @@ void *custom_realloc(void *ptr, size_t size) {
   memcpy(new_ptr, ptr, block_ptr->size);
   custom_free(ptr);
   return new_ptr;
+}
+
+// Initialize the memory to 0
+void *custom_calloc(size_t nelem, size_t elsize) {
+  size_t size = nelem * elsize;
+  if (size > TOTAL_MEMORY_SIZE) {
+    return NULL;
+  }
+
+  void *ptr = custom_malloc(size);
+  memset(ptr, 0, size);
+  return ptr;
 }
 
 int main() {
@@ -218,7 +231,7 @@ int main() {
   *p = 6;
   printf("%d\n", *p);
   printf("%p\n", &p);
-  printf("%d\n", sizeof(*p));
+  printf("%zu\n", sizeof(*p));
   new_p = custom_realloc(p, sizeof(double));
   if (new_p == NULL) {
     printf("Bad realloc error\n");
@@ -226,8 +239,20 @@ int main() {
   }
 
   printf("%p\n", &new_p);
-  printf("%d\n", sizeof(*new_p));
+  printf("%zu\n", sizeof(*new_p));
   /*free_memory();*/
 
+  // Allocate array of 5 ints, init to 0
+  int *arr = (int *)custom_calloc(5, sizeof(int));
+  if (arr == NULL) {
+    printf("Calloc failed\n");
+    exit(1);
+  }
+
+  for (int i = 0; i < 5; i++) {
+    printf("arr[%d] = %d\n", i, arr[i]);
+  }
+
+  /*custom_free(arr);*/
   return 0;
 }

@@ -25,3 +25,5 @@ Goals
 [2-6-Strings and the String Library](01-Areas/Computer/Dive_Into_Systems/notes/chapter2/2-6-Strings%20and%20the%20String%20Library.md)
 
 [[2-7-C Structs]]
+
+[[2-8-Input-output in C]]
