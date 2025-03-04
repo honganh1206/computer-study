@@ -1,0 +1,25 @@
+
+- Migrate App1 (Send email notifications) to Azure + App based on serverless computing solution => A **Logic App**
+- Stop the dev team from provisioning too many VMs => **Apply spending limits** to the dev team in Azure subscription
+- Migrating to Azure with several departments => Segmenting Azure for the departments with **multiple subscriptions and resource groups**
+- Sanctioning a strategy to create multiple nearly identical Azure resources automatically => Azure API Management should **NOT** be included
+- Multinational company with offices around the globe + Ensure Azure resources are created in an Azure region where each office is located => **Azure Policy** to manage standards for resources
+- Deploying a website hosting large video files with best video playback experience => Content Delivery Network
+- Task to identify an Azure service that can **collect multiple events** from multiple Azure resources + store events in a centralized repository => **Azure Monitor** (dedicated to monitoring Azure resources) instead of Azure Event Hubs (dedicated to big data streaming)
+- CTO tracking company's regulatory standards and regulations => Regulatory compliance in Security Center
+- Asked by manager to **centrally manage all Azure subscriptions** => Use my Microsoft account
+- VM accidentally turned off by an user => Investigate with **Azure activity log**
+- Manage several SQL instances + Receive message to increase Azure subscription limits => **Create a new support request**
+- Virtual network AZ-900-VNET in a resource group named AZ-900-RG + Assign a policy that virtual networks are not allowed in AZ-900-RG => AZ-900-VNET continues to function normally as Azure Policy effects count only for **new resources**
+	- AZ-900-VNET will be marked as "Non-compliant" and no other virtual network will be added
+	- Existing resources will continue to function normally
+
+- Migrate existing custom applications to Azure, with some applications requiring prerequisite applications and services installed => Lift-and-shift scenario => IaaS
+- Team of devs planning to deploy VMs configured by ARM templates + Minimize administrative effort => DevTest Labs
+- Migrate data and resources to Azure as PaaS => App Service and VM with Microsoft SQL Server installed => **YES**
+- Configure Azure to send email alerts when the current billing period exceeds a specified limit => **Budget Alerts**
+- Migrate thousands of user accounts + On-premises data center will be retired => Sync all AD user accounts to Azure AD
+- Azure service that can collect multiple **events** coming from multiple Azure resources currently running + Events stored in a centralized repository => Azure Monitor
+- Compliance policy stating a server named FinServer must be on a separate network segment => A virtual network for FinServer and another virtual network for other services
+- Enable the client computers on your on-premises network to communicate to the Azure VMs => A **Virtual Network Gateway** as a VPN + Dedicated subnet in Azure Virtual Network as a **gateway subnet**
+- 
