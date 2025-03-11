@@ -10,3 +10,9 @@ tags: []
 [[Switch statement]]
 
 [[Command line arguments]]
+
+[[Void type and type recasting]]
+
+[[Pointer Arithmetic]]
+
+[[C libraries for using, compiling and linking]]
