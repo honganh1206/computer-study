@@ -22,3 +22,5 @@ To resolve, the programmer must _explicitly provide paths on the command line_ u
 # -I for header file and -L for shared object file
 gcc -I/home/me/include -o myprog myprog.c -L/home/me/lib -lexamplelib
 ```
+
+[[Creating my own library - A quick glance]]
