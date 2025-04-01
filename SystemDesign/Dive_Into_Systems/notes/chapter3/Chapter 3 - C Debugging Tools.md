@@ -8,3 +8,5 @@ What we will learn:
 
 - `gdb` - GNU debugger
 - Valgrind - Code profiling suite
+
+[[Debugging with GDB]]
