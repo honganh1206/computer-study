@@ -10,3 +10,7 @@ tags: []
 [[Scope, Skills and Essential Tools]]
 
 [[Core Structure and Terminology]]
+
+[[Programming languages for DE]]
+
+[[Eventstream]]

@@ -10,3 +10,5 @@ What we will learn:
 - Valgrind - Code profiling suite
 
 [[Debugging with GDB]]
+
+[[Debugging memory with Valgrind]]

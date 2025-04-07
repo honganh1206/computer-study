@@ -4,6 +4,8 @@ aliases: []
 tags: []
 ---
 
+[Web version!](https://diveintosystems.org/)
+
 # Index of Dive Into Systems
 
 [[Chapter 0 - Introduction]]

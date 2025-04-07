@@ -20,6 +20,11 @@ Since `void *` is a generic pointer type, it CANNOT be _directly dereferenced_ s
 
 Thus, we use **recasting** to tell the compiler the specific type of pointer variable, so the compiler can generate the correct memory access code
 
+```c
+// malloc returns void * here
+bigfish = (int *)malloc(sizeof(int) * 10);
+```
+
 Using `void *` parameter type in a thread function allows the thread to _take any type of application-specific pointer_
 
 The use of `void *` parameter makes `pthread_create` a generic thread creation function
