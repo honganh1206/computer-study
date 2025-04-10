@@ -5,7 +5,7 @@ tags:
 cssclasses:
   - center-images
 ---
-hexadecimal (or simple “hex”) uses **digits from 0 to 9** along with **characters from “A” to “F”** to represent 16 possible values.
+Hexadecimal (or simple “hex”) uses **digits from 0 to 9** along with **characters from “A” to “F”** to represent 16 possible values.
 
 ![[{B8AA02F9-640B-431A-9DD5-16D6CA193AA7}.png]]
 
