@@ -1,0 +1,1 @@
+An algorithm that takes a statement as input and determines *whether the statement is universally valid*

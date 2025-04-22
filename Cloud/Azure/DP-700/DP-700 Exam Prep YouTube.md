@@ -14,3 +14,11 @@ tags: []
 [[Programming languages for DE]]
 
 [[Eventstream]]
+
+[[Windowing Functions]]
+
+[[Configure Spark in Microsoft Fabric]]
+
+[[Spark Structured Streaming with PySpark]]
+
+[[Questions and answers DP-700]]

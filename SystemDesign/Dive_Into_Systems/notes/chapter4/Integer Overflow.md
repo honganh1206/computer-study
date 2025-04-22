@@ -1,3 +1,8 @@
+---
+id: Integer Overflow
+aliases: []
+tags: []
+---
 
 [[Odometer Analogy]]
 
@@ -10,3 +15,5 @@ See more
 [[Detecting overflow of unsigned addition]]
 
 [[Detecting overflow in two-complement addition]]
+
+[[Overflow Summary and Consequences]]

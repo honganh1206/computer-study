@@ -4,16 +4,16 @@ aliases: []
 tags: []
 ---
 
-[[What is a bit]]
-
-[[What is a byte]]
-
-[[What is a word]]
 ## What we will learn
 
 - How digital computing represents information
 - How to interpret meaning from digital data
 
+[[What is a bit]]
+
+[[What is a byte]]
+
+[[What is a word]]
 
 [[Number Bases and Unsigned Integers]]
 
@@ -23,3 +23,8 @@ tags: []
 
 [[Integer Overflow]]
 
+[[Bitwise Operators]]
+
+[[Integer Byte Order]]
+
+[[Real Numbers in Binary]]

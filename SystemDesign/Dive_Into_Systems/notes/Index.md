@@ -30,7 +30,7 @@ C programming basics like compiling and running
 - Arithmetic operations on binary data
 - Arithmetic overflow
 
-[Chapter 5 - What von Neumann knew: Computer Architecture](url)
+[Chapter 5 - What von Neumann knew: Computer Architecture](./chapter5/Chapter 5 - What Von Neumann knew Computer Architecture.md)
 
 - Von Neumann architecture from logic gates to the construction of a basic CPU
 - Clock-driven execution
