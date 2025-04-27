@@ -13,4 +13,12 @@ Buses are communication channels to transfer binary values between units
 2. Address buses send the memory addresses of read or write requests
 3. Data buses transfer data
 
-[[The CPU]]
+ [[The Processing Unit]]
+
+[[The Control Unit]]
+
+[[The Memory Unit]]
+
+[[The Input and Output Units]]
+
+[[The von Neumann Machine in Action]]

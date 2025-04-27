@@ -16,10 +16,10 @@ DMA _grants flexibility_ to programs that:
 - Need to allocate _exactly_ the size of data structures needed for a particular execution
 - Grow/shrink the sizes of memory allocated when the programs run
 
-[Heap memory](01-Areas/Computer/Dive_Into_Systems/notes/chapter2/Heap%20memory.md)
+[[Heap memory]]
 
-[malloc and free](01-Areas/Computer/Dive_Into_Systems/notes/chapter2/malloc%20and%20free.md)
+[[malloc and free]] 
 
-[Dynamically allocated arrays and strings](01-Areas/Computer/Dive_Into_Systems/notes/chapter2/Dynamically%20allocated%20arrays%20and%20strings.md)
+[[Dynamically allocated arrays and strings]]
 
-[Pointers to Heap Memory and Functions](01-Areas/Computer/Dive_Into_Systems/notes/chapter2/Pointers%20to%20Heap%20Memory%20and%20Functions.md)
+[[Pointers to Heap Memory and Functions]]

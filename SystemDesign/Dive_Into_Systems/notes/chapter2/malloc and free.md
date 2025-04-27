@@ -20,7 +20,7 @@ int main() {
 }
 ```
 
-Note that `malloc` returns a `void*` ([void pointer](./The void type and type recasting.md)). Thus, sometimes we might see calls to `malloc` that _explicitly recast its return type from `void` to match the type of the pointer variable_
+Note that `malloc` returns a `void*` (void pointer) Thus, sometimes we might see calls to `malloc` that _explicitly recast its return type from `void` to match the type of the pointer variable_
 
 ```c
 int* p = (int*)malloc(sizeof(ptr));
