@@ -11,7 +11,9 @@ A **conjunction** of expressions combines sub-expressions that evaluates to 0 or
 
 ## 2. Write an expression for when each circuit output is 1
 
- Consider `A == 0` and `B == 0`. We then express each input  when they evaluate to 1
+[[How to write a logical expression using conjunction and disjunction]]
+
+ Consider `A == 0` and `B == 0`. We then express each input when the output evaluate to 1
 
 ```bash
 NOT(A)    # is 1 when A is 0
@@ -34,7 +36,7 @@ Finally we create a **disjunction** of each conjunction that evaluate to 1
 
 Here the circuit designers employ techniques to *simplify the expression to create a minimal equivalent expression* - one that corresponds to the fewest operators and/or shortest path lengths of gates through the circuit
 
-Tip: Start from the innermost expression and work outward
+Tip: **Start from the innermost expression and work outward**
 
 ![[Pasted image 20250426162557.png]]
 
