@@ -4,3 +4,5 @@
 
 [[Use Apache Spark in Microsoft Fabric]]
 
+[[Work with Delta Lake tables in Microsoft Fabric]]
+
