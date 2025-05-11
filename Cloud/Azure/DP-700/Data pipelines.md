@@ -15,6 +15,9 @@ Offer a wide variety of activities for data orchestration
 - Get metadata
 - Execute a script/stored procedure
 
-Provide a visual way to complete activities in a _specific order_
+![[image-18.png|Build pipelines by dragging and dropping with graphical pipeline canvas]]
 
-Provide automation and scheduling to run dataflows
+
+ Commonly used to automate ETL processes that ingest transactional data from operational data stores to analytical data stores e.g., lakehouse, data warehouse, SQL databases, etc.
+
+[[Core pipeline concepts]]

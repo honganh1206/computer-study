@@ -6,3 +6,7 @@
 
 [[Work with Delta Lake tables in Microsoft Fabric]]
 
+[[Orchestrate processes and data movement with Microsoft Fabric]]
+
+[[Organize a Fabric lakehouse using medallion architecture design]]
+

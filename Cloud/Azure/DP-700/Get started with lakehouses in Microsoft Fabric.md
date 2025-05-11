@@ -4,6 +4,8 @@
 
 [[Explore and transform data in a lakehouse]]
 
+[[Considerations for managing your lakehouses]]
+
 
 See more
 

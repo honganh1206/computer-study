@@ -6,3 +6,5 @@ Each week 1-2 units
 
  [[Implement a lakehouse with Microsoft Fabric]]
 
+[[Ingest data with Microsoft Fabric]]
+
