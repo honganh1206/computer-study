@@ -22,3 +22,5 @@ What we do:
 [[Circuits]]
 
 [[Building a Processor]]
+
+[[The Processor executes program instructions]]

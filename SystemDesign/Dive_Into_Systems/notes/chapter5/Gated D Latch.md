@@ -1,4 +1,4 @@
-A [[RS Latch]] with more circuitry to ensure that it **never** receives an input of 0 to both `R` and `S`
+> A [[RS Latch]] with more circuitry to ensure that it **never** receives an input of 0 to both `R` and `S`
 
 ![[image-13.png]]
 

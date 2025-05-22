@@ -1,4 +1,4 @@
-A latch is a type of digital circuit that stores/remembers a 1-bit value
+> A latch is a type of digital circuit that stores/remembers a 1-bit value
 
 A reset-set latch (RS latch) has two input values `S` and `R` and one output value `Q` (also as the value stored in the latch)
 

@@ -9,3 +9,4 @@ The opcode is used as the *signal input*  `S` for the multiplexer to *select whi
 Condition code output is based on the MUX output combined with circuitry to *test the output's value* to determine each condition code bit
 
 > How the binary encoding for ADD would look like  `| OPCODE BITS (1 BYTE WIDE) | OPERAND A SOURCE | OPERAND B SOURCE | RESULT DESTINATION |`
+
