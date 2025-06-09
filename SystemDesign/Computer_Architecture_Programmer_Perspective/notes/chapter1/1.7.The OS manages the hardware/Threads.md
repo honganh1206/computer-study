@@ -12,6 +12,8 @@ A process can consist of *multiple execution units* called **threads**. Each thr
 > - Ability to **share data between multiple threads** unlike processes
 > - Efficiency compared to processes
 
+Each thread is an independent stream of execution. 
 
+Example: Two programs have their own thread of independent execution, and these two threads can be scheduled by the OS to run "at the same time" on a multithreaded processor
 
 

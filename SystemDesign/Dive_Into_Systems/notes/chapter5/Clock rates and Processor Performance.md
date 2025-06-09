@@ -1,0 +1,3 @@
+Historically, increasing the clock rate has been an effective way to improve processor performance. However, CPU clock rates have reached their limit due to problems associated with *handling heat dissipation* of faster clocks aka **power wall**
+
+Multicore processors resolve this with multiple simple CPU cores per chip, and each core is driven by a clock rate *which has not increased from the previous-generation core*

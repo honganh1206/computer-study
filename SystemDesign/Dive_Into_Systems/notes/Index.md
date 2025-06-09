@@ -10,34 +10,34 @@ tags: []
 
 [[Chapter 0 - Introduction]]
 
-[Chapter 1 - Introduction to C programming](./chapter1/Chapter 1 - Introduction to C programming.md)
+[[Chapter 1 - Introduction to C programming]]
 
 C programming basics like compiling and running
 
-[Chapter 2 - A deeper dive into C programming](./chapter2/Chapter 2 - A deeper dive into C programming.md)
+[[Chapter 2 - A deeper dive into C programming]]
 
 **Most** of the C language, notably pointers and dynamic memory
 
-[Chapter 3 - C debugging tool](./chapter3/Chapter 3 - C Debugging Tools.md)
+[[Chapter 3 - C Debugging Tools]]
 
 - Common C debugging tools like GDB and Valgrind
 - Illustrate how they can be used to **debug various applications**
 
-[Chapter 4 - Binary and Data Representation](./chapter4/Chapter 4 - Binary and Data Representation.md)
+[[Chapter 4 - Binary and Data Representation]]
 
 - Encoding data into binary
 - Binary representation of C types
 - Arithmetic operations on binary data
 - Arithmetic overflow
 
-[Chapter 5 - What von Neumann knew: Computer Architecture](./chapter5/Chapter 5 - What Von Neumann knew Computer Architecture.md)
+[[Chapter 5 - What Von Neumann knew Computer Architecture]]
 
 - Von Neumann architecture from logic gates to the construction of a basic CPU
 - Clock-driven execution
 - Stages of instruction execution through arithmetic, storage and control circuits
 - (Briefly) Pipelining, modern architecture features
 
-[Chapter 6 - Under the C: Diving into Assembly](url)
+[[Chapter 6 - Under the C Diving into Assembly]]
 
 Translating C into assembly code from basic arithmetic expressions to functions, stackks, and arrays and `struct`
 

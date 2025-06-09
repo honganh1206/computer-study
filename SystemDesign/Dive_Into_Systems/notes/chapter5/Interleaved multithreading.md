@@ -1,0 +1,1 @@
+A CPU scheduling technique where *the processor switches between multiple threads of execution* on every clock cycle/fixed cycle interval

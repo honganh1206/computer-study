@@ -13,5 +13,10 @@ The benefits are the stages can *operate in parallel* as they work on different 
 > [!info]
 > A simple hardware design can reach an execution rate of *1 instruction per clock cycle*
 
+ (More in [[Chapter 4]])
 
-(More in [[Chapter 4]])
+From DIS
+
+[[Pipelining Instruction Execution]]
+
+[[Advanced Pipelining Instruction Considerations]]

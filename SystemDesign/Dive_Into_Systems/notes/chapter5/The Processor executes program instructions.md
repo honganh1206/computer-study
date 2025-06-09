@@ -5,3 +5,5 @@ Four phases common in most architectures: Fetch, Decode, Execute and WriteBack
 [[The 4 Phases - Fetch Decode Execute WriteBack]]
 
 [[Clock-Driven Execution]]
+
+[[The CPU in a full computer]]
