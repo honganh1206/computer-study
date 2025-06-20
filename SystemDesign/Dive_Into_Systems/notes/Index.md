@@ -41,7 +41,7 @@ C programming basics like compiling and running
 
 Translating C into assembly code from basic arithmetic expressions to functions, stackks, and arrays and `struct`
 
-[Chapter 7 - 64-bit x86 Assembly](url)
+[[Chapter 7 - 64-bit x86 Assembly]]
 
 [Chapter 8 - 32-bit x86 Assembly (IA32)](url)
 

@@ -13,7 +13,7 @@ A **gentle** introduction into:
 - C programming
 - Architecture fundamentals
 - Assembly language
-- Multithreading
+- Multi-threading
 
 > [!TIP]
 > We use the ocean metaphor here: Like modern life rises from the primordial ocean, modern programming rises from early computer architecture
@@ -29,22 +29,3 @@ This book targets **intermediate-level courses** such as introduction to compute
 
 This book is NOT designed to provide complete coverage of all system topics
 
-```mermaid
-graph TD
-    A[1. C intro] --> B[2. C Depth]
-    A --> C[3. C debug]
-    A --> D[4. Binary rep]
-    C --> B
-    B --> F[6-10. Assembly]
-    D --> F
-    A --> E[5. Arch]
-    D --> E
-    E --> G[11. Mem hierarchy]
-    E --> L[12. Optimization]
-    F --> L
-    G --> H[13. OS]
-    G --> I[14. Shared mem]
-    H --> J[15. Other parallel]
-    I --> J
-
-```
