@@ -6,5 +6,7 @@ We cover the Intel Architecture 64-bit (x86-64) [[Instruction Set Architecture]]
 
 [[Common instructions of the x86-64 ISA]]
 
+[[Additional Arithmetic Instructions of the x86-64 ISA]]
+
 
 

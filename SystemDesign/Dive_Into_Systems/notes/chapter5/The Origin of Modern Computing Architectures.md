@@ -10,4 +10,4 @@ Claude Shannon, drawing upon the work of George Boole, showed that Boolean logic
 
 [[Early electronic computers]]
 
-[[So what did von Neumann know?]]
+[[What von Neumann knew]]
