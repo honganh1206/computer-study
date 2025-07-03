@@ -8,5 +8,7 @@ We cover the Intel Architecture 64-bit (x86-64) [[Instruction Set Architecture]]
 
 [[Additional Arithmetic Instructions of the x86-64 ISA]]
 
+[[Conditional Control and Loops in x86-64 ISA]]
+
 
 

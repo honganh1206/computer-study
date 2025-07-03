@@ -7,4 +7,3 @@
 [[Bitwise Instructions in x86-64 ISA]]
 
 [[The Load Effective Address Instruction]]
-

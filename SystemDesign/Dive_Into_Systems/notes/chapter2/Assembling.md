@@ -15,6 +15,9 @@ The `gcc` compiler will then produce _binary files_ in the format ELF (Executabl
 
 ```bash
 gcc -c myprog.c
+
+# See the Assembly after compilation
+gcc -S myprog.c
 ```
 
 We can view the inside of the binary files with:
