@@ -1,5 +1,4 @@
 
-
 | Instruction | Translation                                                                                                               |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------- |
 | `push S`    | Pushes a copy of S onto the top of the stack. Equivalent to:<br><br>`sub $0x8, %rsp`<br>`mov S, (%rsp)`                   |

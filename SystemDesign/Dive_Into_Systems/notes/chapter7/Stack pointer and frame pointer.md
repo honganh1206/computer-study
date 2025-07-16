@@ -4,3 +4,7 @@
 
 In the past, `%rbp` was used to track the base of the active stack and help to reference parameters. But this pointer has been less frequently used in x86-64
 
+[[Stack frame and frame record]]
+
+[[Common function management instructions]]
+

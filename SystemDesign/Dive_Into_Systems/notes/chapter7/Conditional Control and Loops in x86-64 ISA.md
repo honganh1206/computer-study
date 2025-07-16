@@ -4,3 +4,5 @@ The compiler translates conditionals into Assembly instructions that *modify the
 
 [[Preliminaries in x86-64 ISA]]
 
+[[Functions in Assembly in x86-64 ISA]]
+
