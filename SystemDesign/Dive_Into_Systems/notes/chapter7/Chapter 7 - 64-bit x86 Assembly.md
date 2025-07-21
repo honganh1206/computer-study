@@ -10,5 +10,8 @@ We cover the Intel Architecture 64-bit (x86-64) [[Instruction Set Architecture]]
 
 [[Conditional Control and Loops in x86-64 ISA]]
 
+[[Functions in Assembly in x86-64 ISA]]
 
+[[Recursion in Assembly in x86-64 ISA]]
 
+[[Arrays in Assembly in x86-64 ISA]]

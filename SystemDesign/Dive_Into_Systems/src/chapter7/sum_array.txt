@@ -122,6 +122,7 @@ Disassembly of section .text:
     1164:	e9 77 ff ff ff       	jmp    10e0 <register_tm_clones>
 
 0000000000001169 <sumArray>:
+    # Ininitalization
     1169:	f3 0f 1e fa          	endbr64 
     116d:	55                   	push   %rbp # save %rbp
     116e:	48 89 e5             	mov    %rsp,%rbp # new stack frame?
@@ -129,22 +130,26 @@ Disassembly of section .text:
     1175:	89 75 e4             	mov    %esi,-0x1c(%rbp) # copy length (2nd param) to %rbp-0x1c
     1178:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%rbp) # copy 0 to total var
     117f:	c7 45 f8 00 00 00 00 	movl   $0x0,-0x8(%rbp) # copy 0 to i
-    1186:	eb 1d                	jmp    11a5 <sumArray+0x3c> # go to 11a5 (line 142)
-    1188:	8b 45 f8             	mov   -0x8(%rbp),%eax # copy i to %eax
-    118b:	48 98                	cltq   
-    118d:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx
+    # Jump to condition check
+    1186:	eb 1d                	jmp    11a5 <sumArray+0x3c> # go to start of loop conditions
+    # Loop starts
+    1188:	8b 45 f8             	mov   -0x8(%rbp),%eax # copy i to %eax for sign-extension and later compute 
+    118b:	48 98                	cltq   # convert i to a 64-bit integer
+    118d:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx # compute i*4 (offset) then store to %rdx to perform pointer arithmetic
     1194:	00 
-    1195:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
-    1199:	48 01 d0             	add    %rdx,%rax
-    119c:	8b 00                	mov    (%rax),%eax
-    119e:	01 45 fc             	add    %eax,-0x4(%rbp)
-    11a1:	83 45 f8 01          	addl   $0x1,-0x8(%rbp)
+    1195:	48 8b 45 e8          	mov    -0x18(%rbp),%rax # copy base address arr (1st param) to %rax
+    1199:	48 01 d0             	add    %rdx,%rax # compute arr+i*4, then store in %rax
+    119c:	8b 00                	mov    (%rax),%eax # dereference the value stored in arr[i] and store in %eax 
+    119e:	01 45 fc             	add    %eax,-0x4(%rbp) # add %eax to total
+    11a1:	83 45 f8 01          	addl   $0x1,-0x8(%rbp) # add 1 to i (i+=1)
+    # Loop condition
     11a5:	8b 45 f8             	mov    -0x8(%rbp),%eax # copy i to %eax
-    11a8:	3b 45 e4             	cmp    -0x1c(%rbp),%eax
-    11ab:	7c db                	jl     1188 <sumArray+0x1f>
-    11ad:	8b 45 fc             	mov    -0x4(%rbp),%eax
-    11b0:	5d                   	pop    %rbp
-    11b1:	c3                   	ret    
+    11a8:	3b 45 e4             	cmp    -0x1c(%rbp),%eax # compare i to length
+    11ab:	7c db                	jl     1188 <sumArray+0x1f> # go back to loop body
+    11ad:	8b 45 fc             	mov    -0x4(%rbp),%eax # copy total to %eax
+    11b0:	5d                   	pop    %rbp # prepare to leave function
+    11b1:	c3                   	ret    # return total
+
 
 00000000000011b2 <main>:
     11b2:	f3 0f 1e fa          	endbr64 
