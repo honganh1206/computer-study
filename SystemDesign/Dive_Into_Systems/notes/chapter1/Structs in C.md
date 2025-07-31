@@ -5,7 +5,7 @@ aliases:
 tags: []
 ---
 
-# 5-3-Structs in C
+# Structs in C
 
 A way to create a collection of data elements of **different types**
 

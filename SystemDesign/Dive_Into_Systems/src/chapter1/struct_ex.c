@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
-struct studentT {
+struct studentT
+{
   char name[64];
   int age;
   float gpa;
@@ -10,10 +11,12 @@ struct studentT {
 
 int checkID(struct studentT s, int min_age);
 
-int checkID(struct studentT s, int min_age) {
+int checkID(struct studentT s, int min_age)
+{
   int ret = 1; // return true
 
-  if (s.age < min_age) {
+  if (s.age < min_age)
+  {
     ret = 0;
     // test changing the student's age
     // here only the value inside the struct parameter is modified
@@ -26,7 +29,16 @@ int checkID(struct studentT s, int min_age) {
   return ret;
 }
 
-int main() {
+void initStudent(struct studentT *s, char *nm, int ag, int gr, float g)
+{
+  strncpy(s->name, nm, 64);
+  s->grad_yr = gr;
+  s->age = ag;
+  s->gpa = g;
+}
+
+int main()
+{
   // struct studentT student1, student2;
 
   // strcpy(student1.name, "Hong Anh Pham");
@@ -52,18 +64,17 @@ int main() {
   int can_vote;
   struct studentT std;
 
-  strcpy(std.name, "Rick");
-
-  std.age = 17;
-  std.gpa = 3.5;
-  std.grad_yr = 2021;
+  initStudent(&std, "Rick", 17, 3.5, 2021);
 
   can_vote = checkID(std, 18);
   // Rick will still be 17 here
 
-  if (can_vote) {
+  if (can_vote)
+  {
     printf("%s is %d years old and can vote.\n", std.name, std.age);
-  } else {
+  }
+  else
+  {
     printf("%s is %d years old and cannot vote.\n", std.name, std.age);
   }
 

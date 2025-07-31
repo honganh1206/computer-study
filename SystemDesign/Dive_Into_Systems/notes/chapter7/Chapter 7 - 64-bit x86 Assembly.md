@@ -15,3 +15,10 @@ We cover the Intel Architecture 64-bit (x86-64) [[Instruction Set Architecture]]
 [[Recursion in Assembly in x86-64 ISA]]
 
 [[Arrays in Assembly in x86-64 ISA]]
+
+[[Matrices in Assembly in x86-64 ISA]]
+
+[[Structs in Assembly in x86-64 ISA]]
+
+[[Buffer overflow in x86-64 ISA]]
+

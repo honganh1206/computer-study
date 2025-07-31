@@ -47,7 +47,7 @@ Translating C into assembly code from basic arithmetic expressions to functions,
 
 [Chapter 9 - ARM Assembly](url)
 
-[Chapter 10 - Key Assembly Takeaways](url)
+[[Chapter 10 - Key Assembly Takeaways]]
 
 [Chapter 11 - Storage and the Memory Hierarchy](url)
 

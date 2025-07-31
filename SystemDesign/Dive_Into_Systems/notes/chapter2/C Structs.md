@@ -5,9 +5,9 @@ aliases:
 tags: []
 ---
 
-# 2-7-C Structs
+# C Structs
 
-[Revisiting structs](../chapter1/5-3-Structs in C.md)
+Recall: [[Structs in C]]
 
 [[Pointers and structs]]
 

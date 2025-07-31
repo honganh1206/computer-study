@@ -62,5 +62,5 @@ student.gpa = 3.5;
 >
 > - The compiler handles all offset calculations **automatically**
 > - The exact size depends on the **system architecture** and the compiler
-> - There might be padding between fields
+> - There might be padding between fields (See [[x64 alignment policy]])
 > - Offsets are calculated at **compile time**
