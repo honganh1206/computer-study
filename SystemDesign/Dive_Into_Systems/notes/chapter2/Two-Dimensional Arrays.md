@@ -34,6 +34,8 @@ The base address of a 2D array is also `&arr[0][0]` - the address of the very fi
 > [!IMPORTANT]
 > For multidimensional array parameters, you must indicate that the parameter is a multidimensional array, but *you can leave the size of the 1st dimension unspecified* 
 
+The **row-major order** defines that all of row 0's elements comes first, followed by all of row 1's element, and so on.
+
 ```c
 // We follow the row-major order here
 Address  | Memory  | Element
