@@ -79,3 +79,10 @@ Tell the agent to use `psql` or tools from PostgreSQL MCP server
 ```undefined
 Return me a list of users with the most number of threads, sorted by number of threads
 ```
+
+## Amp
+
+Use the oracle. It will call the ChatGPT model (the smarter one) for complex debugging
+
+Use the subagents e.g., search agent (explicitly state that) to save the main agents context window tokens
+

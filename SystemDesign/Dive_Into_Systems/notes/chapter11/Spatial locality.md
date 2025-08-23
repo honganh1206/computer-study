@@ -2,6 +2,8 @@ Programs tend to access data that is nearby (data's memory address) other e.g., 
 
 Accesses to the array's contents also benefit from spatial locality: A modern system loads *more than one `int` at a time from memory to the CPU cache* i.e., accessing the first array index fills the cache with both the first integer and also the next few integers. 
 
+> If your program contains a lot of spatial locality, a cache with a small number of big blocks would likely have the best performance.
+
 However, the number of additional integers moved into the cache depends on the *cache's block size*. For example, a 16-byte block size can be used to copy four integers from memory to the cache at a time, so when we access the first integer in the cache, the other three are served out of cache and thus reducing cost.
 
 Consider the following example:

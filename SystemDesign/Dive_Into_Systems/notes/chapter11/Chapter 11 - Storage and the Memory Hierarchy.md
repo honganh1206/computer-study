@@ -4,3 +4,7 @@
 
 [[Locality]]
 
+[[Caching]]
+
+[[Looking Ahead - Caching on Multicore Processors]]
+
