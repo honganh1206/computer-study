@@ -34,25 +34,6 @@ The base address of a 2D array is also `&arr[0][0]` - the address of the very fi
 > [!IMPORTANT]
 > For multidimensional array parameters, you must indicate that the parameter is a multidimensional array, but *you can leave the size of the 1st dimension unspecified* 
 
-The **row-major order** defines that all of row 0's elements comes first, followed by all of row 1's element, and so on.
-
-```c
-// We follow the row-major order here
-Address  | Memory  | Element
----------|---------|---------
- 1230    | ██████  | [0][0]  
- 1234    | ██████  | [0][1]  
- 1238    | ██████  | [0][2]  
- 1242    | ██████  | [0][3]  <-- Row 0
- 1246    | ██████  | [1][0]  
- 1250    | ██████  | [1][1]  
- 1254    | ██████  | [1][2]  
- 1258    | ██████  | [1][3]  <-- Row 1
- 1262    | ██████  | [2][0]  
- 1266    | ██████  | [2][1]  
- 1270    | ██████  | [2][2]  
- 1274    | ██████  | [2][3]  <-- Row 2
- ...     | ...     | ...
-```
+[[Row-major order]]
 
 [[Dynamically allocated 2D arrays]]

@@ -55,7 +55,7 @@ Translating C into assembly code from basic arithmetic expressions to functions,
 - The memory hierarchy and its effects on performance, locality and caching
 - Cachegrind profiling tool
 
-[Chapter 12 - Code Optimization](url)
+[[Chapter 12 - Code Optimization]]
 
 - Compiler optimizations
 - Design applications with performance in mind
