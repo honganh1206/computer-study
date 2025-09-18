@@ -62,7 +62,7 @@ Translating C into assembly code from basic arithmetic expressions to functions,
 - Tips for code optimization
 - Quantitative measurement of a program's performance
 
-[Chapter 13 - The Operating System](url)
+[[Chapter 13 - The Operating System]]
 
 Core OS abstractions and mechanisms like processes, virtual memory and interprocess communication
 
