@@ -6,6 +6,9 @@ tags:
   - "#programming"
 cssclasses:
   - center-images
+sr-due: 2025-09-26
+sr-interval: 1
+sr-ease: 230
 ---
 ## Principle
 

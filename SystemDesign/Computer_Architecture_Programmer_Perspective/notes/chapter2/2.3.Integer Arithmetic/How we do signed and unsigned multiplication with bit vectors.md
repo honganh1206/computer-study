@@ -1,3 +1,9 @@
+---
+sr-due: 2025-09-26
+sr-interval: 1
+sr-ease: 230
+---
+
 Tags: #review #computer #study 
 
 We do multiplication with bit vectors in *the same way we do it with numerical values*: Multiply each bit with each bit of the other vector.

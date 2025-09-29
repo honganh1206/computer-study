@@ -7,6 +7,9 @@ tags:
   - "#computer"
 cssclasses:
   - center-images
+sr-due: 2025-09-26
+sr-interval: 1
+sr-ease: 230
 ---
 Bit vectors can be used to *represent finite sets*. We can encode any subset $A \subseteq \{0,1,\dots ,w-1\}$ ($A$ is a subset of a set) with a bit vector $[a_{w-1},\dots, a_{1}, a_{0}]$ where $a_{1}=1$ *if and only if* $i\in A$.
 

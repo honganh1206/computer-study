@@ -21,7 +21,7 @@ If the `S` input is 1, it will select `A` for output and `B` if `S` input is 0
 
 Expression: `OUTPUT = (S AND A) OR (NOT(S) AND B)`
 
-![[image-2.png|The value of signal input S decides whether to choose A or B as output]]
+![[01-Areas/Computer/SystemDesign/Dive_Into_Systems/notes/chapter5/image-2.png|The value of signal input S decides whether to choose A or B as output]]
 
 [[How the multiplexer selects the output value]]
 

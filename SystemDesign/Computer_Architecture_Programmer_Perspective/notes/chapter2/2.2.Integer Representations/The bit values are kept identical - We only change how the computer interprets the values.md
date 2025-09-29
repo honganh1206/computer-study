@@ -6,6 +6,9 @@ tags:
   - "#programming"
 cssclasses:
   - center-images
+sr-due: 2025-09-26
+sr-interval: 1
+sr-ease: 230
 ---
 We have two functions: $U 2 B_{w}$ to map numbers to their bit representation in their unsigned form ($0 < x < UMax_{w}$) and $T 2 B_{w}$ to map numbers in two’s-complement form ($TMin_{w} \leq x \leq TMax_{w}$). 
 

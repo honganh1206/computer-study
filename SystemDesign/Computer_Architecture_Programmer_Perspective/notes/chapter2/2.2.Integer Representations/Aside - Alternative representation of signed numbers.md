@@ -6,6 +6,9 @@ tags:
   - "#computer"
 cssclasses:
   - center-images
+sr-due: 2025-09-26
+sr-interval: 1
+sr-ease: 230
 ---
 **Ones’ complement**: The sign bit has the weight of $-(2^{w-1}-1)$ instead of $-2^{w-1}$
 

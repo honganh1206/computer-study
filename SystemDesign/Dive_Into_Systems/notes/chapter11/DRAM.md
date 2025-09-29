@@ -4,7 +4,7 @@ It is dynamic because *it must frequently refresh the charge of its capacitors t
 
 Modern systems use DRAM to implement main memory on modules that connect to the CPU. These modules are connected to the CPU via the *memory bus*
 
-![[image-1.png|The positions of primary storage devices relative to the memory bus]]
+![[01-Areas/Computer/SystemDesign/Dive_Into_Systems/notes/chapter11/image-1.png|The positions of primary storage devices relative to the memory bus]]
 
 To retrieve a value from memory, the CPU puts an address of the data on the memory bus + signal the memory modules to perform a read. After a short delay, the memory module sends the value at the address to the CPU via the bus.
 

@@ -1,8 +1,13 @@
+---
+sr-due: 2025-09-26
+sr-interval: 1
+sr-ease: 230
+---
+
 Tags: #review #computer #clang 
 
-
 ## Principle
-
+ 
 For 2 bit vectors $\vec{x} = [x_{w-1}, x_{w-2}, \dots, x_{0}]$ of width $w$ and $\vec{x'}= [x_{w-1}, \dots, x_{w-1}, x_{w-2}, \dots, x_{0}]$ of width $w'$ where $w' > w$ , we will have:
 
 $$

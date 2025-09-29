@@ -2,8 +2,12 @@
 tags:
   - "#study"
   - "#review"
+  - "#flashcards"
 cssclasses:
   - center-images
+sr-due: 2025-09-28
+sr-interval: 3
+sr-ease: 250
 ---
 Hexadecimal (or simple “hex”) uses **digits from 0 to 9** along with **characters from “A” to “F”** to represent 16 possible values.
 

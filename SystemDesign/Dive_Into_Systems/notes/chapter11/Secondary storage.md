@@ -10,7 +10,7 @@ Secondary storage devices connect to a system that is *farther away from the CPU
 
 Example of how a secondary storage connects to the main memory: A hard disk connects to a Serial ATA controller, which connects to the system I/O controller, which connects to the memory bus.
 
-![[image-2.png|538x419]]
+![[01-Areas/Computer/SystemDesign/Dive_Into_Systems/notes/chapter11/image-2.png|538x419]]
 
 
 [[SSD and HDD]]

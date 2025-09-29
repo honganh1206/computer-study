@@ -14,6 +14,7 @@ A **conjunction** of expressions combines sub-expressions that evaluates to 0 or
 [[How to write a logical expression using conjunction and disjunction]]
 
  Consider `A == 0` and `B == 0`. We then express each input when the output evaluate to 1
+<!--SR:!2025-09-29,4,270-->
 
 ```bash
 NOT(A)    # is 1 when A is 0

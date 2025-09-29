@@ -6,6 +6,9 @@ tags:
   - "#computer"
 cssclasses:
   - center-images
+sr-due: 2025-09-28
+sr-interval: 3
+sr-ease: 250
 ---
 ## Principles
 

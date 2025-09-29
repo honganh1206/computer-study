@@ -4,6 +4,9 @@ tags:
   - "#review"
 cssclasses:
   - center-images
+sr-due: 2025-09-28
+sr-interval: 3
+sr-ease: 250
 ---
 ![[{24A4C9C7-7035-4F07-9176-75D3F55D8697}.png]]
 

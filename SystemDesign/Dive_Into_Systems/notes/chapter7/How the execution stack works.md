@@ -21,7 +21,7 @@ int adder2(int a) {
     115b:       c3                      ret    
 ```
 
-![[image-3.png|Execution stack of adder2]]
+![[01-Areas/Computer/SystemDesign/Dive_Into_Systems/notes/chapter7/image-3.png|Execution stack of adder2]]
 
 > The `%rip` (instruction pointer) goes from the instruction from the top to the bottom.
 

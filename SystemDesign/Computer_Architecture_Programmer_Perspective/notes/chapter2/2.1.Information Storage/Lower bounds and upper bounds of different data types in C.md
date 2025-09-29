@@ -6,6 +6,9 @@ tags:
   - "#computer"
 cssclasses:
   - center-images
+sr-due: 2025-09-28
+sr-interval: 3
+sr-ease: 250
 ---
 The C standard set the *lower bounds* on the numeric ranges of different data types e.g., `signed int` on a 32-bit system has a lower bound of $2^{-31} = -2147483648$. However, **there are no upper bounds** i.e., implementations of C can provide **larger ranges** as long as they meet the minimum requirements set by the standards (`long int` can store a larger value than $2^{31} - 1$ on 64-bit systems)
 

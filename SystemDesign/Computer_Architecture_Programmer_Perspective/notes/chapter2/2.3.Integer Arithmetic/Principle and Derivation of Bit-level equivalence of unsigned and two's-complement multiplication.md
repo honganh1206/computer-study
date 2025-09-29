@@ -1,3 +1,9 @@
+---
+sr-due: 2025-09-26
+sr-interval: 1
+sr-ease: 228
+---
+
 Tags: #review #computer #study
 
 ## Principle

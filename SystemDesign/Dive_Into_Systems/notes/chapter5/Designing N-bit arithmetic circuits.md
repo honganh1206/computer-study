@@ -20,7 +20,7 @@ We need the 3rd input `CARRY IN`
 SUM = A XOR B XOR CARRY IN
 ```
 
-![[image.png|1-bit adder circuit with three inputs]]
+![[01-Areas/Computer/SystemDesign/Dive_Into_Systems/notes/chapter5/image.png|1-bit adder circuit with three inputs]]
 
 We use this 1-bit adder circuit to construct $N$-bit adder circuit by *feeding corresponding operand bits through individual 1-bit adder circuits* 
 

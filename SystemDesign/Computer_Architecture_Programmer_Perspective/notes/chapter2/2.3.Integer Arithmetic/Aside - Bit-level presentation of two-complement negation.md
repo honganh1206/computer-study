@@ -1,3 +1,9 @@
+---
+sr-due: 2025-09-26
+sr-interval: 1
+sr-ease: 230
+---
+
 Tags: #review #study #computer 
 
 We have several ways to *determine the two's-complement negation of a value represented at the bit level* for an integer value of $x$

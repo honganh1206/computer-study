@@ -23,7 +23,7 @@ Access the lower 32-bit registers by replacing the `r` in the register name with
 
 Access the 16-bit registers by referencing *the last two letters* of the register name
 
-![[image.png]]
+![[01-Areas/Computer/SystemDesign/Dive_Into_Systems/notes/chapter7/image.png]]
 
 ## Last 8 registers `%r8` to `%r15`
 

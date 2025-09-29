@@ -15,6 +15,6 @@ Example: 1. Read from address 1010000001100100
 
 Remaining bits `10100` for the tag
 
-![[image-20.png]]
+![[01-Areas/Computer/SystemDesign/Dive_Into_Systems/notes/chapter11/image-20.png]]
 
 Both lines at index 000011 (set 3) are invalid, so the request misses, and the cache loads data from main memory. The set’s LRU bit is 0, so the cache loads data into the left line and updates the LRU bit to 1.

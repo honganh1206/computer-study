@@ -1,2 +1,2 @@
-![[image.png]]
+![[01-Areas/Computer/AI/LLMs/image.png]]
 

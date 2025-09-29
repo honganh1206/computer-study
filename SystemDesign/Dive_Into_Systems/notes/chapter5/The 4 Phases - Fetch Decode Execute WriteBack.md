@@ -8,7 +8,7 @@ Example: If all instructions are 32 bits long, the PC's value is incremented by 
 
 The PC's value is incremented by arithmetic circuits that are *separate from the ALU increment*
 
-![[image-21.png|The fetch stage of execution: Read the instruction in memory -> Store the instruction in the IR -> Increment the PC's value]]
+![[01-Areas/Computer/SystemDesign/Dive_Into_Systems/notes/chapter5/image-21.png|The fetch stage of execution: Read the instruction in memory -> Store the instruction in the IR -> Increment the PC's value]]
 
 ## Decoding
 
@@ -21,7 +21,7 @@ The opcode is sent to the [[Arithmetic Logic Unit]] (ALU) as input and the two s
 
 Destination bits in the IR are sent in the WriteBack phase
 
-![[image-22.png|Decoding the instructions -> Send opcode to ALU and operand bits to the register file.]]
+![[01-Areas/Computer/SystemDesign/Dive_Into_Systems/notes/chapter5/image-22.png|Decoding the instructions -> Send opcode to ALU and operand bits to the register file.]]
 
 
 ## Executing
@@ -30,7 +30,7 @@ Data inputs of the ALU come from *the two outputs of the register file* `Data ou
 
 The ALU outputs the result of adding the values in `Reg1` and `Reg3` (now stored in the register file) , together with the condition code. The result is stored in the *destination register*, which is sent via the `Data in` input of the register file 
 
-![[image-23.png|The ALU performs the specified operation (from the opcode) on its input values (as outputs from the register file)]]
+![[01-Areas/Computer/SystemDesign/Dive_Into_Systems/notes/chapter5/image-23.png|The ALU performs the specified operation (from the opcode) on its input values (as outputs from the register file)]]
 
 ## WriteBack
 

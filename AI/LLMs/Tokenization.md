@@ -10,5 +10,5 @@ Steps:
 2. Start with one token per character
 3. Merge common tokens into a token
 
-![[image-1.png]]
+![[01-Areas/Computer/AI/LLMs/image-1.png]]
 

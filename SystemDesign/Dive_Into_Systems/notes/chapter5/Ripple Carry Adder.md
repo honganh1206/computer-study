@@ -1,6 +1,6 @@
  The 1-bit adder circuit for the $0^{th}$ bits (the least significant bits) receives a value of 0 for its `CARRY IN` from another part of the CPU circuitry that decodes the ADD instruction
 
-![[image-1.png]]
+![[01-Areas/Computer/SystemDesign/Dive_Into_Systems/notes/chapter5/image-1.png]]
 
 The `SUM` ripples through the circuit from the low-order to the high-order bits
 

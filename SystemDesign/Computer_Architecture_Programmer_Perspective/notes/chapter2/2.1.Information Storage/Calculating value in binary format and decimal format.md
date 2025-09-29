@@ -4,6 +4,9 @@ tags:
   - "#review"
 cssclasses:
   - center-images
+sr-due: 2025-09-28
+sr-interval: 3
+sr-ease: 250
 ---
 In binary, each place value represents **the power of 2** and each digit in a number can only be **0 or 1**, so the value 255 is represented in binary format as 11111111<sub>2</sub>
 

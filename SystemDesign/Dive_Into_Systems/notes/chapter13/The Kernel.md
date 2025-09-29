@@ -15,5 +15,5 @@ The kernel provides the **device interface** for interacting with hardware devic
 
 Like how? The device driver software interacts with the OS via the *device interface* by loading the device driver code into the OS.
 
-![[image.png|Core OS functionality to use the system and facilitate cooperation between I/O devices and users]]
+![[01-Areas/Computer/SystemDesign/Dive_Into_Systems/notes/chapter13/image.png|Core OS functionality to use the system and facilitate cooperation between I/O devices and users]]
 

@@ -22,13 +22,13 @@ If another L1 cache has the block in the M state, it will write its block back t
 
 ## Example
 
-![[image-22.png|Both cores have a copy of the block in their L1 caches]]
+![[01-Areas/Computer/SystemDesign/Dive_Into_Systems/notes/chapter11/image-22.png|Both cores have a copy of the block in their L1 caches]]
 
 At this point, both core 0 and core 1 can safely read from the copy stored in their L1 caches.
 
 When core 0 writes to the copy of the block in its L1 cache, its L1 cache controller notifies the other L1 caches to *invalidate their copy of the block*. Core 1 will then clear the S flag + set the I flag on its copy, while core 0 writes to the block and sets the M flag. At this point, the copy in L2 cache and in core 1's L1 cache are *stale*.
 
-![[image-23.png|Stale copies inside core 1 and L2 cache]]
+![[01-Areas/Computer/SystemDesign/Dive_Into_Systems/notes/chapter11/image-23.png|Stale copies inside core 1 and L2 cache]]
 
 
 When core 1 reads from the memory block, the I flag will tell the core that the cache block cannot be used to satisfy the read.  To resolve this:

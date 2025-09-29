@@ -114,17 +114,17 @@ Push the value 40 to the stack at address `-0x4(%rbp)`
 
 Put the value 40 into register `%eax` representing the variable `y`
 
-![[image-20.png]]
+![[01-Areas/Computer/SystemDesign/Dive_Into_Systems/notes/chapter7/image-20.png]]
 
 The `pop` instruction restores `%rbp` to its previous value and modify the `%rsp` to `0xd28`
 
-![[image-21.png]]
+![[01-Areas/Computer/SystemDesign/Dive_Into_Systems/notes/chapter7/image-21.png]]
 
 When `retq` executes, the return address (resume execution on `main`) is popped off the stack and sent to `%rip`
 
 > -- Call to `assign` ends here
 
-![[image-22.png]]
+![[01-Areas/Computer/SystemDesign/Dive_Into_Systems/notes/chapter7/image-22.png]]
 
 We now return to the state *before we invoke `assign`* with the stack pointer and the frame pointer restored to their values prior to their invocation -> Stack frame for `main` is again the active one
 
@@ -132,7 +132,7 @@ The values on the previous active frame of `assign` is still on the stack (`0x55
 
 > -- Call to `adder` starts here -- 
 
-![[image-23.png]]
+![[01-Areas/Computer/SystemDesign/Dive_Into_Systems/notes/chapter7/image-23.png]]
 
 The call to `adder` *overwrites* the old return address (`0x55f`) with the new return address (`0x554`), which point to *the next instruction to be executed after `adder` is done executing*. 
 

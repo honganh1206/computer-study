@@ -4,7 +4,7 @@ After the booting, the OS waits to do something, as many OSes are **interrupt-dr
 
 Devices need the OS to do something for them. A **network interface card** (NIC) can wake the OS up to handle received data over its network connection. In that case, the OS delivers the data from the NIC to the waiting web browser process.
 
-![[image-2.png]]
+![[01-Areas/Computer/SystemDesign/Dive_Into_Systems/notes/chapter13/image-2.png]]
 
 When the NIC receives data from the network, it is referred to as **interrupts**. 
 
@@ -12,7 +12,7 @@ Hardware interrupts are delivered to the CPU on an *interrupt bus*.
 
 How it goes: A device places a number indicating the type of interrupt on the bus. When the CPU detects the signal, it stops executing the current process's instructions and starts executing OS interrupt handler code. After the execution, the OS resumes to the process's instructions at the point where the interruption occurs.
 
-![[image-3.png]]
+![[01-Areas/Computer/SystemDesign/Dive_Into_Systems/notes/chapter13/image-3.png]]
 
 
 ## OS Traps

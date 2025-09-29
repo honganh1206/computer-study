@@ -9,7 +9,7 @@ On x86-64 systems, the execution stack grows toward **lower** addresses.
 
 Operations occur at the "top" of the stack
 
-![[image-1.png|444x558]]
+![[01-Areas/Computer/SystemDesign/Dive_Into_Systems/notes/chapter7/image-1.png|444x558]]
 
 [[Processes]] have their own regions of memory called the **call stack**
 

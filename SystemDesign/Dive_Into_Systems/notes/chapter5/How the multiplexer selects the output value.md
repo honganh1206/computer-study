@@ -1,7 +1,7 @@
 
 Case 1: `A = 1, B = 0, S = 1`
 
-![[image-3.png|A two-way 1-bit multiplexer circuit chooses A when S is 1]]
+![[01-Areas/Computer/SystemDesign/Dive_Into_Systems/notes/chapter5/image-3.png|A two-way 1-bit multiplexer circuit chooses A when S is 1]]
 
  `S` is negated by the `NOT` gate before being sent to the top `AND` gate with B, thus the 0 output from the upper `AND` gate
 
