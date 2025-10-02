@@ -14,7 +14,7 @@ Similarly, when an user types `CTRL-C` in a Unix shell, the child process receiv
 
 After executing `exit`, the OS delivers a `SIGCHILD` signal to the parent process to notify it that the child has exited and thus become a *zombie process* (its execution state is cleaned up, but the OS still maintains a little information about it)
 
-[[Blocking and Reaping]]
+[[Waiting, Blocking and Reaping]]
 
 Example of invoking multiple system calls:
 

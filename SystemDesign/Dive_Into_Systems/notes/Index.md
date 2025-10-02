@@ -66,7 +66,7 @@ Translating C into assembly code from basic arithmetic expressions to functions,
 
 Core OS abstractions and mechanisms like processes, virtual memory and interprocess communication
 
-[Chapter 14 - Leveraging shared memory in the multicore era](url)
+[[Chapter 14 - Leveraging Shared Memory in the Multicore Era]]
 
 - Multicore processors
 - Threads and Pthreads programming

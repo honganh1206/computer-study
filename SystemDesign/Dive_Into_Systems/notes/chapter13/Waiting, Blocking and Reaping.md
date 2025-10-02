@@ -1,6 +1,6 @@
 A parent process **reaps** (clean up the rest of the state) its zombie child by calling the `wait` system call. 
 
-However, the parent process blocks (enter a BLOCKED state) if the parent calls `wait` BEFORE its child process exits, and the parent then reaps the child process by calling `waitpid` with a PID argument of the child.
+However, the parent process blocks (pause the execution and do nothing further) if the parent calls `wait` BEFORE its child process exits, and the parent then reaps the child process by calling `waitpid` with a PID argument of the child.
 
 ![[image-11.png|From left to right: The child process calls exit to clean up its execution state -> The parent receives a SIGCHILD signal -> The parent calls waitpid to reap its zombie child]]
 
@@ -14,3 +14,5 @@ $  a.out        # shell process forks child and calls wait
 $  a.out &      # shell process forks child but does not call wait
 $  ps           # (the shell can run ps and a.out concurrently)
 ```
+
+[[The family system calls of wait]]

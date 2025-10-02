@@ -17,12 +17,7 @@ int main(void) {
     mypid = getpid();
     printf("Child: fork returned %d, my pid: %d\n", pid, mypid);
   } else {
-				mypid = getpid();
-
-    printf("Parent: fork returned %d, my pid: %d\n", pid, mypid);
-		}
-
-
-
-
+    mypid = getpid();
+printf("Parent: fork returned %d, my pid: %d\n", pid, mypid);
+  }
 }

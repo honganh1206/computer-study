@@ -1,8 +1,21 @@
- The **stack frame** a.k.a **activation frame/record** refers to the portion of the stack (as a block of memory) allocated to a single function call. Think of it like a "workspace" where a function stores its things.
+The **stack frame** a.k.a **activation frame/record** refers to the portion of the stack (as a block of memory) allocated to a single function call. Think of it like a "workspace" where a function stores its things.
+
+> [!important] Core idea
+> When a function runs, it needs:
+> - Space to store its **parameters** (arguments passed in).
+> - Space for its **local variables**.
+> - A way to **return** to the correct place after finishing (the **return address**).
+> - Possibly some bookkeeping information (like saved registers).
+>
+> All of that data is grouped together as one **frame**. Each time a new function is called, a new frame is pushed onto the stack; when it returns, its frame is popped off.
+
+All of that data is grouped together as one **frame**. Each time a new function is called, a new frame is pushed onto the stack; when it returns, its frame is popped off.
+
+Why do we need a stack frame?  When we executing function calls, we have *local bindings* a.k.a local variables of the function being executed. For that, our approach is to reserve a region of the stack to store the local bindings. 
  
 The memory between stack pointer and base pointer is used for *local variables*. Before the function `fname` is called, it saves the previous function's frame pointer `%rbp` (in this case the previous function is `main` as the caller) as the **saved frame pointer**.
 
-> Why do we have frame pointers? Every push/pop or sub/add operation changes the **stack pointer (`%rsp`)**, so the addresses of local variables or arguments would keep shifting during execution. `%rbp` equals the **stack pointer value at the start of the frame**, so locals and arguments always sit at fixed offsets relative to `%rbp`
+Why do we have frame pointers? Every push/pop or sub/add operation changes the **stack pointer (`%rsp`)**, so the addresses of local variables or arguments would keep shifting during execution. `%rbp` equals the **stack pointer value at the start of the frame**, so locals and arguments always sit at fixed offsets relative to `%rbp`
 
 The callee also sets its own `%rbp` at the address `0x418` holding the value `0x42c`
 
@@ -11,7 +24,7 @@ The callee also sets its own `%rbp` at the address `0x418` holding the value `0x
 
 The active stack frame of `fname` is *bounded* below by the base pointer `fname` at stack address `0x418`. What is stored at `0x418`? The value of `%rbp` i.e., `0x42c` which is an address *indicating the bottom of the activation frame for the `main` function.*
 
-The top of the activation frame of `main`  is bounded by the **return address** (the address where execution should resume after the callee function returns by using jump instructions)
+The top of the activation frame of `main`  is bounded by the **return address** (the address where execution should resume after the callee function `fname()` returns by using jump instructions)
 
 > The return address points to code segment memory like the instruction pointer, not stack memory. See [[Stack management instructions]]
 
