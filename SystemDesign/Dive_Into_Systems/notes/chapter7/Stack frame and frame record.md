@@ -13,7 +13,7 @@ All of that data is grouped together as one **frame**. Each time a new function 
 
 Why do we need a stack frame?  When we executing function calls, we have *local bindings* a.k.a local variables of the function being executed. For that, our approach is to reserve a region of the stack to store the local bindings. 
  
-The memory between stack pointer and base pointer is used for *local variables*. Before the function `fname` is called, it saves the previous function's frame pointer `%rbp` (in this case the previous function is `main` as the caller) as the **saved frame pointer**.
+The memory region between stack pointer and base pointer is used for *local variables* and possibly *function arguments*. Before the function `fname` is called, it saves the previous function's frame pointer `%rbp` (in this case the previous function is `main` as the caller) as the **saved frame pointer**.
 
 Why do we have frame pointers? Every push/pop or sub/add operation changes the **stack pointer (`%rsp`)**, so the addresses of local variables or arguments would keep shifting during execution. `%rbp` equals the **stack pointer value at the start of the frame**, so locals and arguments always sit at fixed offsets relative to `%rbp`
 

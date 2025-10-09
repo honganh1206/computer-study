@@ -1,3 +1,5 @@
+A CPU is an *example* of a processor, which is *any circuit* that performs computatioin.
+
 As instruction operands are stored in general-purpose registers, the register file send data to the ALU inputs. In turns, the ALU's *result* is sent as input to the register file
 
 The CPU has **additional circuitry** to move data between the ALU, register file and other components like the main memory
