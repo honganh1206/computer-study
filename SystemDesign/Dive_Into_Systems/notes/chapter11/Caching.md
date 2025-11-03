@@ -1,3 +1,11 @@
+> [!summary] Basic concepts related to cache design
+> - Data is transferred in *blocks* to the cache, and block sizes tend to get larger at lower levels.
+> - Each cache is organized into a series of sets, and each set has a number of lines.
+> - Bits of a memory address are used to determine set, tag and block offset of the cache.
+> - A **cache hit** occurs when the desired data block exists in the cache; otherwise, a **cache miss** occurs.
+> - The **valid bit** indicates if a block is safe to use.
+> - The **write-through** strategy ensures the data is written to the cache  and main memory simultaneously, while the **write-back** strategy ensures data is written only to cache and written to main memory after the cache is evicted.
+
 A small, fast device on a CPU that *holds limited subsets of main memory*.
 
 Questions to answer:
@@ -15,6 +23,8 @@ Questions to answer:
 [[Set Associative Caches]]
 
 [[Cache Analysis with Cachegrind]]
+
+[[Caches on Multicore systems]]
 
 ## Exercises
 

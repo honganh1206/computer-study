@@ -2,12 +2,19 @@ Recall: When accessing data in memory, a program first computes the data's memor
 
 A **cache block** refers to the *unit of data* transferred between main memory and the cache. A **cache line** refers to the *physical storage location* in the cache that holds one cache block.
 
+To discover the cache line size of the L1 cache, use this command:
+
+```bash
+# L1 cache line size for the machine is 64 vytes
+$ cat /sys/devices/system/cpu/cpu0/cache/index0/coherency_line_size
+64
+```
+
 A single cache line holds exactly *one* block of data.
 
 If the data at the desired address is already inside the cache, we allow the program to *skip accessing main memory*. The hardware can simultaneously send the desired address to *both the cache and main memory*.
 
 If the data is present in the cache i.e., a **cache hit**, the cache hardware *cancels the pending memory access*. Otherwise, if the data isn't in the cache (**cache miss**), then the CPU has to wait for memory to retrieve it.
-
 
 When we write to an address not in the cache (a miss), *the CPU will still load that memory block into the cache*, so when the program touches it again soon, the access will be faster
 

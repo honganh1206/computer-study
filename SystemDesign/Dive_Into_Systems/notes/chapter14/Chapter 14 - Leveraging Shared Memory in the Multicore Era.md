@@ -28,3 +28,10 @@ We must identify correctly the number of cores on a system to accurately measure
 
 [[POSIX Threads]]
 
+[[Synchronizing Threads]]
+
+[[Measuring the performance of parallel programs]]
+
+[[Caches on Multicore systems]]
+
+But cache coherence can harm performance, thus enters [[False Sharing]]

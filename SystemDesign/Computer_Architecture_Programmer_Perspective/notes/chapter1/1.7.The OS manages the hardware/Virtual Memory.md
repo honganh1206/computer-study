@@ -4,6 +4,8 @@ tags:
 cssclasses:
   - center-images
 ---
+TLDR: [[Fundamental of Virtual Memory]]
+
 An **abstraction** that provides each process with the **illusion** that *each process has an exclusive use of the main memory*.
 
 Each process has a [[Virtual address space]] (an uniform view of memory) in which instructions and data are stored. We can think of those spaces as an array of addressable bytes from address 0 to some maximum address like $2^{31}-1$ for 32-bit systems.

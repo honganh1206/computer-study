@@ -8,4 +8,6 @@ A snooping L1 cache controller can identify any read/write from another L1 cache
 
 **Write-update coherency protocols** is where the new value of data is snooped from the bus and applied to update all copies stored in other L1 caches
 
+## Other mechanisms
+
 A **directory-based cache coherence mechanism** can be used to *trigger cache coherency protocols*. This mechanism *scales better* than snooping does, as snooping has performance limitations of multiple cores sharing a single bus. However, directory-based mechanisms *require more state to detect* when memory blocks are shared, and are slower than snooping.
