@@ -35,3 +35,6 @@ We must identify correctly the number of cores on a system to accurately measure
 [[Caches on Multicore systems]]
 
 But cache coherence can harm performance, thus enters [[False Sharing]]
+
+[[Thread Safety]]
+
