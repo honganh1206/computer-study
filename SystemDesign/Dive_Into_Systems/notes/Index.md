@@ -75,7 +75,7 @@ Core OS abstractions and mechanisms like processes, virtual memory and interproc
 - Deadlock
 - Advanced topics: Measuring parallel performance, thread safety, and cache coherence
 
-[Chapter 15 - Looking ahead](url)
+[[Chapter 15 - Other parallel systems and parallel programming models]]
 
 - Intro to distributed memory systems and Message Passing Interface (MPI)
 - Hardware accelerators and CUDA

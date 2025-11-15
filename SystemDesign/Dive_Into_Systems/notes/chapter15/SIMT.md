@@ -1,0 +1,3 @@
+Similar to multithreaded SIMD, where a single instruction is executed *in lockstep* by multiple threads running on the processing units.
+
+In SIMT, *the total number of threads can be larger than the total number of processing units*. This requires the scheduling of multiple group of threads to execute the same sequence of instructions (Refer to [[Expediting Process Execution with Threads]] but TLDR is that hardware resources are limited and threads must share them efficiently).

@@ -1,3 +1,10 @@
+> [!summary]
+> - *Threads are the fundamental unit of concurrent program*: Each thread has its own allocation of stack memory but shares the program data, heap and instructions. Threads run non-deterministically.
+> - *Synchronization constructs ensure programs work correctly*: A race condition can occur whenever two operations update a shared value, so synchronization constructs like mutexes and semaphores ensure threads execute one at a time.
+> - *Be mindful when using synchronization constructs*: Certain sections are critical sections, which must run atomically. A good strategy is to have threads employ local variables as much as possible and update shared variables when necessary.
+> - *Not all components of parallelizable*: Some programs have large serial components that can hinder a multithreaded program's performance on multiple cores per Amdahl's Law. Programmers must look at other metics when ascertain the performance of their programs.
+
+
  > [!important]
 > The terms processors and CPU are used interchangeably. A processor is *any circuit* that performs some computation on external data, while a CPU is an *example* of a processor (Refer to [[Central Processing Unit - CPU]]).
 
@@ -37,4 +44,6 @@ We must identify correctly the number of cores on a system to accurately measure
 But cache coherence can harm performance, thus enters [[False Sharing]]
 
 [[Thread Safety]]
+
+[[Implicit Threading with OpenMP]]
 
