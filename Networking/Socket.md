@@ -1,6 +1,8 @@
-A way to speak to other programs using standard Unix file descriptors (integers associated with an open file).
+A way to speak to other programs using standard Unix [[File descriptor]] (integers associated with an open file).
 
 > Everything in Unix is a file. That file can be a network connection, a FIFO, a pipe, a terminal, a real on-the-disk file, or anything else.
+
+When we open a network socket, that socket is also represented by an integer and it is called **socket descriptor**.
 
 We call to the `socket()` system routine, and we communicate through it using the specialized `send()` and `recv()` socket calls (Like [[Message Passing Interface]]?)
 

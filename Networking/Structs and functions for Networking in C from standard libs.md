@@ -123,6 +123,9 @@ int sendto(int sockfd, const void *msg, int len, unsigned int flags,
 // from is a pointer to a local struct sockaddr_storage
 // and that will be filled with the IP address + port from originating machine
 // and fromlen specifies the length of *from
+
+// NOTE: This is a BLOCKING system call
+// so it waits indefinitely until a datagram arrives
 int recvfrom(int sockfd, void *buf, int len, unsigned int flags,
              struct sockaddr *from, int *fromlen); 
 ```

@@ -210,3 +210,8 @@ len = strlen(msg);
 // sometimes bytes_sent < len, so we need to re-send the rest of the string
 bytes_sent = send(sockfd, msg, len, 0);
 ```
+
+On datagram sockets, if the talker calls `connect()` and specifies an address to the listener, the talker *may* only send to/receive from the address specified by `connect()` so we don't have to use `sendto()` and `recvfrom()`
+
+> [!warning]
+> Sometimes `send()` does not send all the bytes we ask it to. The unsent data will be waiting in the buffer, and it's up to us to get the data out.
