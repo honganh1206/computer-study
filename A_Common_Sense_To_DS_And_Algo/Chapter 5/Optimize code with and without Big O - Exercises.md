@@ -1,0 +1,12 @@
+---
+tags:
+  - "#study"
+  - "#review"
+cssclasses:
+  - center-images
+---
+1. $O(N)$
+2. $O(N^2)$
+3. $O(N)$
+4. $O(N)$
+5. $O(N^2)$
