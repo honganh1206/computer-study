@@ -52,3 +52,5 @@ The framework aggregates and combines the intermediate key-value pairs into `(ke
 The framework then directs the boss node to generate `R = 8` reduce tasks, and each task then executes independently to turn `(get, [1, 1])` to `(get, 2)` by a worker node.
 
 Each worker node appends the output to a final file.
+
+See more in [[MapReduce Querying]]
