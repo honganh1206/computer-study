@@ -41,3 +41,14 @@ kill <PID>
 # The forceful way - Send a SIGKILL signal asking the program to stop immediately without any cleaning up
 kill -9 <PID>
 ```
+
+`chroot`: Change a process's root dir
+
+When we `chroot` to `/fake/root` when it opens the file like `/usr/bin/redis`, it will get `/fake/root/usr/bin/redis`
+
+```bash
+mkdir redis; cd redis;
+tar -xzf redis.tar
+chroot $PWD /usr/bin/redis
+# redis is running!
+```

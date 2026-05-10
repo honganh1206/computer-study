@@ -1,0 +1,1183 @@
+<style>
+body {
+  max-width: 1000px;
+  margin: 2em auto;
+  font-family: "Lato", serif;
+}
+
+body h1, body h2, body h3 {
+  font-family: sans-serif;
+  letter-spacing: 0.02em;
+}
+h1 {
+  font-size: 1.5em;
+  margin: 0;
+  margin-bottom: 0.5em;
+  text-align: center;
+}
+h2 {
+  font-size: 1.25em;
+  margin: 0.5em 0;
+}
+.page {
+  border-radius: 20px;
+  padding: 1em;
+  margin: 1em 0;
+}
+ul {
+    padding: 0;
+}
+
+.panel {
+  /* 1 grid cell */
+  grid-column: span 1;
+  padding: 1rem;
+  border: 2px solid black;
+}
+
+.panel-2 {
+  grid-column: span 2;
+  padding: 1rem;
+  border: 2px solid black;
+}
+.panel-2v {
+  grid-row: span 2;
+  padding: 1rem;
+  border: 2px solid black;
+}
+
+.panel-3 {
+  grid-column: span 3;
+  padding: 1rem;
+  border: 2px solid black;
+}
+
+.panel h3 {
+  text-align: center;
+}
+
+.panel li {
+  margin-left: 2rem;
+}
+
+.panel ol {
+  margin: 0;
+  padding: 0;
+}
+
+.panels {
+  display: grid;
+  /* 3 columns, 2 rows */
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: .3rem;
+}
+</style>
+
+<section class="page">
+<h1>How Containers Work</h1>
+<h2>By Julia Evans</h2>
+<p> A cartoon of a person in a spacesuit, accompanied by a penguin (also in a spacesuit), flying through a colourful tunnel surrounded by blocks reading “cgroups”, “capabilities”, “namespaces”, and “pivot_root”. The person has an excited expression, a medium skin tone, and big curly hair that fills the bubble helmet of their spacesuit.</p>
+</section>
+
+<section class="page">
+<h1>why this zine?</h1>
+<p>When I started using containers I was SO CONFUSED.
+
+<p>sad stick figure with curly hair: is this a... process? a virtual machine? what is HAPPENING on my computer right now?
+
+<p>So I decided to learn how they work under the hood!
+
+<p>person, now happy: oh! a container image is just a tarball with a lot of files in it! that's simple!!
+
+<p>Now I feel confident that I can solve basically any problem with containers because I understand how they work.
+I hope that after reading this zine, you'll feel like that too.
+
+<p>person: containers use Linux kernel features, so you'll be seeing a LOT of this guy:
+
+<p>Linux, represented by Tux the penguin: there are only about 10 main ideas! let's go learn them!
+
+</section>
+
+
+
+<section class="page">
+<h1>table of contents</h1>
+
+<ul>
+<li>why containers? - 4</li>
+<li>the big idea: include EVERY dependency - 5</li>
+<li>containers aren't magic - 6</li>
+<li>containers = processes - 7</li>
+<li>container kernel features - 8</li>
+<li>pivot_root - 9</li>
+<li>layers - 10</li>
+<li>overlay filesystems - 11</li>
+<li>container registries - 12</li>
+<li>cgroups- 13</li>
+<li>namespaces - 14</li>
+<li>how to make a namespace - 15</li>
+<li>PID namespaces - 16</li>
+<li>user namespaces - 17</li>
+<li>network namespaces - 18</li>
+<li>container IP addresses - 19</li>
+<li>capabilities - 20</li>
+<li>seccomp BPF- 21</li>
+<li>configuration options- 22</li>
+</ul>
+
+
+</section>
+
+
+
+
+
+<section class="page">
+<h1>why containers?</h1>
+
+
+<div class="panels">
+
+<div class="panel">
+<h3 id="there-s-a-lot-of-container-hype">there&#39;s a lot of container hype</h3>
+<p>Illustration of two stick figures with medium-length straight hair. One has hearts in their eyes and a speech bubble that says &quot;containers&quot; with hearts around it, the other one has a thought bubble that says &quot;???&quot;</p>
+<p>Here are 2 problems they solve... </p>
+</div>
+
+<div class="panel">
+<h3 id="problem-building-software-is-annoying">problem: building software is annoying</h3>
+<pre><code>$ ./configure 
+$ make all 
+<span class="hljs-keyword">ERROR: </span>you have version 
+     2.1.1 and you need 
+     at least 2.2.4
+</code></pre>
+</div>
+
+<div class="panel">
+<h3 id="solution-package-all-dependencies-in-a-container-">solution: package all dependencies in a <em> container </em></h3>
+<p>stick figure with medium length straight hair and bangs, thinking: I ran the container and the build worked RIGHT AWAY?? is that allowed?? </p>
+<p>Many CI systems use containers. </p>
+</div>
+
+
+<div class="panel">
+<h3 id="containers-have-their-own-filesystem">containers have their own filesystem</h3>
+<p>This is the big reason containers are great. </p>
+<p>host OS, represented by a box with a smiley face: I&#39;m running Ubuntu 19.04</p>
+<p>container, also represented by a box with a smiley face: I&#39;m running an old CentOS distribution host OS from 2014!</p>
+</div>
+
+<div class="panel">
+<h3 id="problem-deploying-software-is-annoying-too">problem: deploying software is annoying too</h3>
+<p>sad stick figure with short curly hair: ugh my website is broken because I used a Python 3.6 feature and the server only has Python 3.5 </p>
+</div>
+
+<div class="panel">
+<h3 id="solution-deploy-a-container">solution: deploy a container</h3>
+<p>server: I have the exact same version of everything as in development! no more silly errors! </p>
+<p>happy stick person with short curly hair: yay! I can get back to writing code!</p>
+
+</div>
+
+
+
+</div>
+</section>
+
+
+
+<section class="page">
+<h1>the big idea: include EVERY dependency</h1>
+
+
+<div class="panels">
+
+
+<div class="panel">
+<h3 id="containers-package-every-dependency-together">containers package EVERY dependency together</h3>
+<p>smiling stick figure with short curly hair: to make sure this program will run on
+your laptop, I&#39;m going to send you every single file you need</p>
+</div>
+
+<div class="panel-2">
+<h3 id="a-container-image-is-a-tarball-of-a-filesystem">a container image is a tarball of a filesystem</h3>
+<p>Here&#39;s what&#39;s in a typical Rails app&#39;s container:</p>
+<ul>
+<li>your app&#39;s code</li>
+<li>libc + other system libraries</li>
+<li>Ubuntu base OS</li>
+<li>Ruby interpreter</li>
+<li>Ruby gems</li>
+</ul>
+</div>
+
+<div class="panel">
+<h3 id="how-images-are-built">how images are built</h3>
+<ol>
+<li>start with a base OS</li>
+<li>install program + dependencies</li>
+<li>configure it how you want</li>
+<li>make a tarball of the WHOLE FILESYSTEM</li>
+</ol>
+<p>tiny stick figure with short curly hair: this is what <code>docker build</code> does!</p>
+
+</div>
+
+<div class="panel">
+<h3 id="running-an-image">running an image</h3>
+<ol>
+<li>download the tarball</li>
+<li>unpack it into a directory</li>
+<li>run a program and pretend that directory is its whole filesystem</li>
+</ol>
+
+</div>
+
+<div class="panel">
+<h3 id="images-let-you-install-programs-realty-easily">images let you &quot;install&quot; programs realty easily</h3>
+<p>person, thinking:  I can set up a Postgres test database in like 5 seconds! wow!</p>
+
+</div>
+
+
+
+</div>
+</section>
+
+
+
+
+<section class="page">
+<h1>containers aren&#39;t magic</h1>
+
+
+
+<p>These 15 lines of bash will start a container running the fish shell. Try it! (download this script at bit.ly/containers-arent-magic)</p>
+<p>It only runs on Linux because these features are all Linux-only.</p>
+<p><code>wget bit.ly/fish-container -O fish.tar</code>   (# 1. download the image)<br><code>mkdir container-root; cd container-root</code>
+<code>tar -xf ../fish.tar</code>   (# 2. unpack image into a directory)<br>
+<code>cgroup_id=&quot;cgroup_$(shuf -i 1000-2000 -n 1)&quot;</code> (# 3. generate random cgroup name)<br>
+<code>cgcreate -g &quot;cpu, cpuacct, memory: $cgroup_id&quot;</code> (# 4.   make a cgroup &amp; set CPU/memory limits)<br><code>cgset -r cpu. shares=512 &quot;$cgroup_id&quot;</code><br><code>cgset -r memory.limit_in_bytes=1000000000 \</code><br><code>&quot;$cgroup_id&quot;</code><br><code>cgexec -g &quot;cpu, cpuacct, memory: $cgroup_id&quot; \</code> (# 5.  use the cgroup)<br><code>unshare -fmuipn --mount-proc\</code> (# 6. make and use some namespaces)<br><code>chroot &quot;$PWD&quot; \</code> (# 7. change root directory)<br><code>/bin/sh -c &quot;</code><br><code>/bin/mount -t proc proc /proc &amp;&amp;</code> (# 8. use the right /proc)<br><code>hostname container-fun-times &amp;&amp;</code>  (# 9. change the hostname)<br><code>/usr/bin/fish&quot;</code> (# 10. finally, start fish!)</p>
+
+
+
+</div>
+</section>
+
+
+
+<section class="page">
+<h1>containers = processes</h1>
+
+
+<div class="panels">
+
+
+<div class="panel">
+<p>a container is a group of Linux processes</p>
+<p>Illustration of a smiling stick figure with curly hair.</p>
+<p>person: on a Mac, all your containers are actually running in a Linux virtual machine</p>
+</div>
+
+<div class="panel-2">
+<p>person: I started &#39;top&#39; in a container. Here&#39;s what that looks like in ps:</p>
+<ul>
+<li>outside the container   <pre><code>$ ps aux grep top 
+<span class="hljs-keyword">USER</span> <span class="hljs-title">PID</span> <span class="hljs-literal">START</span> COMMAND 
+root <span class="hljs-number">23540</span> <span class="hljs-number">20</span>:<span class="hljs-number">55</span> top 
+bork <span class="hljs-number">23546</span> <span class="hljs-number">20</span>:<span class="hljs-number">57</span> top
+</code></pre></li>
+<li>inside the container<pre><code>$ ps aux | grep top 
+<span class="hljs-keyword">USER</span> <span class="hljs-title">PID</span> <span class="hljs-literal">START</span> COMMAND 
+root <span class="hljs-number">25</span> <span class="hljs-number">20</span>:<span class="hljs-number">55</span> top
+</code></pre>(<code>root 23540 20:55 top</code> and <code>root 25 20:55 top</code> are the same process!)</li>
+</ul>
+</div>
+
+<div class="panel">
+<h3 id="container-processes-can-do-anything-a-normal-process-can-">container processes can do anything a normal process can...</h3>
+<p>Illustration of a smiling stick figure with curly hair, and Linux, represented by its penguin mascot</p>
+<p>person: I want my container to do X Y Z W!
+Linux: sure! your computer, your rules!</p>
+</div>
+
+<div class="panel">
+<h3 id="but-usually-they-have-restrictions">but usually they have restrictions</h3>
+<p>(there are drawings of locks on either side of the word &quot;restrictions&quot;)</p>
+<p>Illustration of a container, represented by a box with a smiley face. Around it are arrows with the following labels:</p>
+<ul>
+<li>different PID namespace</li>
+<li>different root directory</li>
+<li>cgroup memory limit</li>
+<li>limited capabilities</li>
+<li>not allowed to run some system calls</li>
+</ul>
+</div>
+
+<div class="panel">
+<h3 id="the-restrictions-are-enforced-by-the-linux-kernel">the restrictions are enforced by the Linux kernel</h3>
+<p>Linux: NO, you can&#39;t have more memory!<br>person: on the next page we&#39;ll list all the kernel features that make this work!</p>
+
+</div>
+
+
+
+</div>
+</section>
+
+
+
+<section class="page">
+<h1>container kernel features</h1>
+
+
+<div class="panels">
+
+
+
+
+
+
+
+
+<div class="panel">
+<h3 id="containers-use-these-linux-kernel-features">containers use these Linux kernel features</h3>
+<p>&quot;container&quot; doesn&#39;t have a clear definition, but Docker containers use all of these features.</p>
+</div>
+
+<div class="panel">
+<h3 id="pivot_root">pivot_root</h3>
+<p>set a process&#39;s root directory to a directory with the contents of the container image</p>
+</div>
+
+<div class="panel">
+<h3 id="cgroups">cgroups</h3>
+<p>limit memory/CPU usage for a group of processes</p>
+<p>Linux, represented by a box with a smiley face: only 5OO MB of RAM for you!</p>
+</div>
+
+<div class="panel">
+<h3 id="namespaces">namespaces</h3>
+<p>allow processes to have
+their own:</p>
+<ul>
+<li>network</li>
+<li>PIDs</li>
+<li>hostname</li>
+<li>mounts</li>
+<li>users</li>
+<li>more</li>
+</ul>
+</div>
+
+<div class="panel">
+<h3 id="capabilities">capabilities</h3>
+<p>security: give specific permissions</p>
+<h3 id="seccomp-bpf">seccomp-bpf</h3>
+<p>security: prevent dangerous system calls</p>
+
+</div>
+
+<div class="panel">
+<h3 id="overlay-filesystems">overlay filesystems</h3>
+<p>this is what makes layers work! Sharing layers saves disk space &amp; helps containers start faster</p>
+
+</div>
+
+</div>
+</section>
+
+
+
+<section class="page">
+<h1>pivot_root</h1>
+
+
+<div class="panels">
+
+
+
+
+
+
+
+<div class="panel">
+<h3 id="a-container-image-is-a-tarball-of-a-filesystem">a container image is a tarball of a filesystem</h3>
+<p>(or several tarballs: 1 per layer)</p>
+<p>pensive stick figure with short curly hair: if someone sends me a tarball of  their filesystem, how do I use that though?</p>
+</div>
+
+<div class="panel-2">
+<h3 id="chroot-change-a-process-s-root-directory">chroot: change a process&#39;s root directory</h3>
+<p>If you chroot to /fake/root when it opens the file /usr/bin/redis it&#39;ll get /fake/root/usr/bin/redis instead.</p>
+<p>You can &quot;run&quot; a container just by using chroot, like this:</p>
+<pre><code><span class="hljs-variable">$ </span>mkdir redis; cd redis
+<span class="hljs-variable">$ </span>tar -xzf redis. tar
+<span class="hljs-variable">$ </span>chroot <span class="hljs-variable">$PWD</span> /usr/bin/redis
+<span class="hljs-comment"># done ! redis is running!</span>
+</code></pre>
+</div>
+
+<div class="panel-2">
+<h3 id="programs-can-break-out-of-a-chroot">programs can break out of a chroot</h3>
+<h4 id="chroot-">chroot:</h4>
+<p>Illustration of a box labelled &quot;whole filesystem&quot;. Inside it is another box labelled &quot;redis container directory&quot;. </p>
+<p>All these files are still there! A root process can access them if it wants.</p>
+<h4 id="pivot_root">pivot_root</h4>
+<p>Illustration of a box labelled  &quot;redis container directory&quot;. </p>
+<p>You can unmount the old filesystem so it&#39;s impossible to access it. </p>
+<p>Containers use pivot_root instead of chroot.</p>
+</div>
+
+<div class="panel">
+<h3 id="to-have-a-container-you-need-more-than-pivot_root">to have a &quot;container&quot; you need more than pivot_root</h3>
+<p>pivot_root alone won&#39;t let you:</p>
+<ul>
+<li>set CPU/memory limits</li>
+<li>hide other running processes</li>
+<li>use the same port as another process</li>
+<li>restrict dangerous system calls</li>
+</ul>
+</div>
+
+
+</div>
+</section>
+
+
+
+<section class="page">
+<h1>layers</h1>
+
+
+<div class="panels">
+
+
+
+
+
+
+
+<div class="panel">
+<h3 id="different-images-have-similar-files">different images have similar files</h3>
+<p>Rails container image and Django container image, each represented by a box with a smiley face: we both use Ubuntu 18.0!</p>
+</div>
+
+<div class="panel">
+<h3 id="reusing-layers-saves-disk-space">reusing layers saves disk space</h3>
+<p>Rails image </p>
+<ul>
+<li>Rails app</li>
+<li>ubuntu:18.04</li>
+</ul>
+<p>Django image</p>
+<ul>
+<li>Django app</li>
+<li>ubuntu:18.04</li>
+</ul>
+<p>Both have the exact same files on disk for ubuntu:18.04.</p>
+</div>
+
+<div class="panel">
+<h3 id="a-layer-is-a-directory">a layer is a directory</h3>
+<pre><code>$ ls <span class="hljs-number">8891378</span>eb*
+bin/ home/ mnt/ run/ tmp/
+boot/ <span class="hljs-class"><span class="hljs-keyword">lib</span>/ <span class="hljs-title">opt</span> <span class="hljs-title">sbin</span>/ <span class="hljs-title">usr</span>/</span>
+dev/ lib64/ proc/ srv/ var/
+etc/ media/ root/ sys/
+</code></pre><p><code>etc</code> are files in an ubuntu:18.04 layer</p>
+</div>
+
+<div class="panel">
+<h3 id="every-layer-has-an-id">every layer has an ID</h3>
+<p>usually the ID is a sha256 hash of the layer&#39;s contents</p>
+<p>example: <code>8e99fae2..</code></p>
+</div>
+
+<div class="panel">
+<h3 id="if-a-file-is-in-2-layers-you-ll-see-the-version-from-the-top-layer">if a file is in 2 layers, you&#39;ll see the version from the top layer</h3>
+<p>Two rectangular boxes on top of one another, each labelled <code>/code/file.py</code>. The one on top is the version you&#39;ll see in the merged image.</p>
+
+</div>
+
+<div class="panel">
+<h3 id="by-default-writes-go-to-a-temporary-layer">by default, writes go to a temporary layer</h3>
+<p>Illustration of a rectangle labelled &quot;temp layer&quot;, with a bunch of other smaller rectangles stacked underneath it. The temp layer is labelled &quot;thse files might be deleted after the container exits.&quot;</p>
+<p>To keep your changes, write to a directory that&#39;s mounted from outside the container</p>
+
+</div>
+
+</div>
+</section>
+
+
+
+<section class="page">
+<h1>overlay filesystems</h1>
+
+
+<div class="panels">
+
+
+
+
+
+
+<div class="panel">
+<h3 id="how-layers-work-mount-t-overlay-">how layers work: <code>mount -t overlay</code></h3>
+<p>smiling stick figure with curly hair: can you combine these 37 layers into one filesystem?</p>
+<p>linux, represented by Tux the penguin: yes! Just run <code>mount —t overlay</code> with the right parameters!</p>
+</div>
+
+<div class="panel">
+<h3 id="-mount-t-overlay-has-4-parameters"><code>mount -t overlay</code> has 4 parameters</h3>
+<ul>
+<li><code>lowerdir</code>: list of read-only directories</li>
+<li><code>upperdir</code>: directory where writes should go</li>
+<li><code>workdir</code>: empty directory for internal use</li>
+<li><code>target</code>: the merged result</li>
+</ul>
+</div>
+
+<div class="panel">
+<h3 id="-upperdir-where-all-writes-go"><code>upperdir</code>: where all writes go</h3>
+<p>when you create, change, or delete a file, it&#39;s recorded in the upperdir.</p>
+<p>usually this starts out empty and is deleted when the container exits</p>
+</div>
+
+<div class="panel">
+<h3 id="lowerdir-the-layers-read-only-">lowerdir: the layers. read only.</h3>
+<p>smiling stick figure with curly hair: you can run <code>$ mount -t overlay</code> inside a container to gee all the lower dirs that were combined to create its filesystem!</p>
+
+</div>
+
+<div class="panel-2">
+<h3 id="here-s-an-example-">here&#39;s an example!</h3>
+<pre><code>$ mount -t overlay overlay -o
+     lowerdir=/lower , upperdir=/upper , workdir=/work /merged
+$ ls /upper
+cat<span class="hljs-selector-class">.txt</span> dog<span class="hljs-selector-class">.txt</span>
+$ ls /lower
+dog. txt bird<span class="hljs-selector-class">.txt</span>
+$ ls /merged
+cat<span class="hljs-selector-class">.txt</span> dog<span class="hljs-selector-class">.txt</span> bird.txt
+</code></pre><p>the merged version of dog.txt is the one from the upper directory</p>
+</div>
+
+</div>
+</section>
+
+
+
+<section class="page">
+<h1>container registries</h1>
+
+
+<div class="panels">
+
+
+<div class="panel">
+<h3 id="sharing-container-images-is-useful">sharing container images is useful</h3>
+<p>smiling stick figure with curly hair: I made an image you can use to run Redis with just one command!</p>
+<p>smiling bald stick figure: yay!</p>
+</div>
+
+<div class="panel">
+<h3 id="a-registry-is-a-server-that-serves-images">a registry is a server that serves images</h3>
+<p>images have an ID, like &quot;leff92&quot;</p>
+<p>and sometimes a tag, like &quot;18.04&quot; or &quot;latest&quot;</p>
+</div>
+
+<div class="panel">
+<h3 id="registries-let-you-download-just-the-layers-you-need">registries let you download just the layers you need</h3>
+<p>client, represented by a box with a smiley face: I already have the Ubuntu base image, I just need <code>0fe223</code></p>
+<p>registry, represented by a smaller box with a smiley face: here&#39;s <code>0fe223</code>!</p>
+</div>
+
+<div class="panel">
+<h3 id="there-are-public-container-registries-">there are public container registries...</h3>
+<p>person: I&#39;m going to use the latest official public Redis image to test my code!</p>
+</div>
+
+<div class="panel">
+<h3 id="-and-private-registries">... and private registries</h3>
+<p>developer at COMPANY, represented by a smiling bald stick figure: every time we build our web service, we upload a new image to our private registry</p>
+
+</div>
+
+<div class="panel">
+<h3 id="be-careful-where-your-container-images-come-from">be careful where your container images come from</h3>
+<p>smiling stick figure: I&#39;ll just run this image from RANDOM_PERSON</p>
+<p>2 months later: oh no! RANDOM_PERSON is mining bitcoin on my server</p>
+</div>
+
+</div>
+</section>
+
+
+
+<section class="page">
+<h1>cgroups</h1>
+
+
+<div class="panels">
+
+
+
+<div class="panel">
+<h3 id="processes-can-use-a-lot-of-memory">processes can use a lot of memory</h3>
+<p>process 1: I want 10 GB of memory<br>process 2: me too!<br>Linux: guys, I only have 16 GB total</p>
+</div>
+
+<div class="panel">
+<h3 id="a-cgroup-is-a-group-of-processes">a cgroup is a group of processes</h3>
+<p>every process in a container is in the same cgroup</p>
+</div>
+
+<div class="panel">
+<h3 id="cgroups-have-memory-cpu-limits">cgroups have memory/CPU limits</h3>
+<p>Linux: you three get 500 MB of RAM to share, okay?</p>
+</div>
+
+<div class="panel">
+<h3 id="use-too-much-memory-get-oom-out-of-memory-killed">use too much memory:| get OOM (&quot;out of memory&quot;) killed</h3>
+<p>process: I want 1 GB of memory<br>Linux: NOPE your limit was 500 MB you die now!<br>process, dead: oh no</p>
+</div>
+
+<div class="panel">
+<h3 id="use-too-much-cpu-get-slowed-down">use too much CPU: get slowed down</h3>
+<p>process: I want to use ALL THE CPU!<br>Linux: you hit your quota for this 100ms period, you&#39;ll have to wait</p>
+</div>
+
+<div class="panel">
+<h3 id="cgroups-track-memory-cpu-usage">cgroups track memory &amp; CPU usage</h3>
+<p>Linux: that cgroup is using 112.3 MB of memory right now</p>
+<p>you can see it in <code>/sys/fs/cgroup</code></p>
+</div>
+
+</div>
+</section>
+
+
+
+<section class="page">
+<h1>namespaces</h1>
+
+
+<div class="panels">
+
+
+
+
+
+
+<div class="panel">
+<h3 id="inside-a-container-things-look-different2-">inside a container, things look different2`</h3>
+<p>Illustration of a smiling stick figure with curly hair.</p>
+<p>Person: I only see 4 processes in <code>ps aux</code>, that&#39;s weird...</p>
+</div>
+
+<div class="panel">
+<h3 id="why-things-look-different-namespaces">why things look different: namespaces</h3>
+<p>Illustration of a container, represented by a box with a smiley face</p>
+<p>Container: I&#39;m in a different PID namespace so <code>ps aux</code> shows different processes!</p>
+</div>
+
+<div class="panel-2v">
+<h3 id="every-process-has-7-namespaces">every process has 7 namespaces</h3>
+<pre><code>$ lsns -p <span class="hljs-number">273</span>
+<span class="hljs-keyword">NS</span> TYPE
+<span class="hljs-number">4026531835</span> cgroup
+<span class="hljs-number">4026531836</span> pid
+<span class="hljs-number">4026531837</span> user
+<span class="hljs-number">4026531838</span> uts
+<span class="hljs-number">4026531839</span> ipc
+<span class="hljs-number">4026531840</span> mnt
+<span class="hljs-number">4026532009</span> net
+</code></pre><p>-p is the PID<br>4026532009 is the namespace ID</p>
+<p>you can also see a process&#39;s namespace with: 
+<code>$ ls -1 /proc/273/ns</code></p>
+</div>
+
+<div class="panel">
+<h3 id="there-s-a-default-host-namespace-">there&#39;s a default (&quot;host&quot; namespace)</h3>
+<p>Person: &quot;outside a container&quot; just means &quot;using the default namespace&quot;</p>
+</div>
+
+
+<div class="panel">
+<h3 id="processes-can-have-any-combination">processes can have any combination</h3>
+<p>Container: I&#39;m using the host network namespace but my own mount container namespace!</p>
+
+</div>
+
+
+
+</div>
+</section>
+
+
+
+<section class="page">
+<h1>how to make a namespace</h1>
+
+
+<div class="panels">
+
+
+
+
+
+
+
+<div class="panel">
+<h3 id="processes-use-their-parent-s-namespaces-by-default">processes use their parent&#39;s namespaces by default</h3>
+<p>parent, represented by a box with a smiley face: I&#39;m in the host network namespace!</p>
+<p>child, represented by a smaller box with a smiley face (created with &#39;clone&#39; syscall): me too!</p>
+</div>
+
+<div class="panel">
+<h3 id="but-you-can-switch-namespaces-at-any-time">but you can switch namespaces at any time</h3>
+<p>box with a smiley face: I&#39;m starting a container so it needs its own namespaces</p>
+</div>
+
+<div class="panel">
+<h3 id="command-line-tools">command line tools</h3>
+<ul>
+<li><code>$ unshare --net COMMAND</code>: run COMMAND in a new network namespace</li>
+<li><code>$ sudo lsns</code>: list all namespaces</li>
+<li><code>$ nsenter -t PID --all COMMAND</code>: run COMMAND in the same namespaces as PID</li>
+</ul>
+</div>
+
+<div class="panel">
+<h3 id="namespace-system-calls">namespace system calls</h3>
+<ul>
+<li>clone: make a new process</li>
+<li>unshare: make + use a namespace</li>
+<li>setns: use an existing namespace</li>
+</ul>
+</div>
+
+<div class="panel">
+<h3 id="-clone-lets-you-create-new-namespaces-for-a-child-process"><em>clone</em> lets you create new namespaces for a child process</h3>
+<p>parent: <code>clone (... CLONE_NEWNET)</code></p>
+<p>child: I have my own network namespace!</p>
+</div>
+
+<div class="panel">
+<h3 id="each-namespace-type-has-a-man-page">each namespace type has a man page</h3>
+<pre><code>$ <span class="hljs-keyword">man</span> network_namespaces
+...
+A physical network device
+can live <span class="hljs-keyword">in</span> exactly <span class="hljs-keyword">one</span>
+network namespace.
+</code></pre>
+</div>
+
+</div>
+</section>
+
+
+
+<section class="page">
+<h1>PID namespaces</h1>
+
+
+<div class="panels">
+
+
+
+<div class="panel">
+<h3 id="the-same-process-has-different-pids-in-different-namespaces">the same process has different PIDs in different namespaces</h3>
+<p>PID in host / PID in container<br>23512 / 1 (PID 1 is special)<br>23513 / 4<br>23518 / 12   </p>
+</div>
+
+<div class="panel">
+<h3 id="pid-namespaces-are-in-a-tree">PID namespaces are in a tree</h3>
+<p>Diagram showing &quot;host PID namespace (the root)&quot; with three arrows coming down from it, each pointing to a label that says &quot;child&quot;.</p>
+<p>Often the tree is just 1 level deep (every child is a container)</p>
+</div>
+
+<div class="panel">
+<h3 id="you-can-see-processes-in-child-pid-namespaces">you can see processes in child PID namespaces</h3>
+<p>Illustration of a host, represented by a box with heart eyes and a big smile.</p>
+<p>host: aw! look at all those containers running!</p>
+</div>
+
+<div class="panel">
+<h3 id="if-pid-1-exits-everyone-gets-killed">if PID 1 exits, everyone gets killed</h3>
+<p>Illustration of PID 1, represented by a box with a smiley face, and Linux, represented by its penguin mascot.</p>
+<p>PID 1: ok I&#39;m done!<br>Linux: I&#39;m kill -q&#39;ing everyone else in this PID namespace IMMEDIATELY</p>
+</div>
+
+<div class="panel">
+<h3 id="killing-pid-1-accidentally-would-be-bad">Killing PID 1 accidentally would be bad</h3>
+<p>Illustration of a container process, represented by a box with a smiley face, and Linux, represented by its penguin mascot.</p>
+<p>container process: <code>kill 1</code><br>Linux: do you WANT everyone to die? I&#39;m not gonna let you do that</p>
+</div>
+
+<div class="panel">
+<h3 id="rules-for-signaling-pid-1">rules for signaling PID 1</h3>
+<ul>
+<li>from same container: only works if the process has set a signal handler </li>
+<li>from the host: only SIGKILL and SIGSTOP are ok, or if there&#39;s a signal handler</li>
+</ul>
+</div>
+
+</div>
+</section>
+
+
+
+<section class="page">
+<h1>user namespaces</h1>
+
+
+<div class="panels">
+
+
+
+<div class="panel">
+<h3 id="user-namespaces-are-a-security-feature-">user namespaces are a security feature...</h3>
+<p>smiling bald stick figure: I&#39;d like root in the container to be totally unprivileged</p>
+<p>smiling stick figure with curly hair: you want a user namespace!</p>
+</div>
+
+<div class="panel">
+<h3 id="but-not-all-container-runtimes-use-them">but not all container runtimes use them</h3>
+<p>same user!</p>
+<p>(two arrows point to two smiley faces, one labelled &quot;root in container&quot;, the other labelled &quot;root on host&quot;)</p>
+</div>
+
+<div class="panel">
+<h3 id="-root-doesn-t-always-have-admin-access">&quot;root&quot; doesn&#39;t always have admin access</h3>
+<p>Container process, represented by a box with a smiley face: I&#39;m root so I can do ANYTHING right?</p>
+<p>Tux: actually you have limited capabilities so mostly you can just access files owned by root!</p>
+</div>
+
+<div class="panel">
+<h3 id="in-a-user-namespace-uids-are-mapped-to-host-uids">in a user namespace, UIDs are mapped to host UIDs</h3>
+<p>process: I&#39;m running as UID O </p>
+<p>Linux: Oh, that&#39;s mapped to 12345</p>
+<p>The mapping is in <code>/proc/self/uid_map</code></p>
+</div>
+
+<div class="panel">
+<h3 id="unmapped-users-show-up-as-nobody-">unmapped users show up as &quot;nobody&quot;</h3>
+<p><code>$ unshare --user bash</code> (create user namespace)<br><code>$ ls -l /usr/bin</code><br><code>.. nobody nogroup   apropos</code><br><code>nobody nogroup   apt</code></p>
+<p>(these are &quot;actually&quot; owned by root but we didn&#39;t map any user)</p>
+</div>
+
+<div class="panel">
+<h3 id="how-to-find-out-if-you-have-a-separate-user-namespace">how to find out if you have a separate user namespace</h3>
+<p>compare the results of
+<code>$ ls /proc/PID/ns</code></p>
+<p>between a container process and a host process.</p>
+</div>
+
+</div>
+</section>
+
+
+<section class="page">
+<h1>network namespaces</h1>
+
+
+<div class="panels">
+
+<div class="panel">
+<h3 id="network-namespaces-are-kinda-confusing">network namespaces are kinda confusing</h3>
+<p>Illustration of an unhappy-looking stick figure with curly hair.</p>
+<p>person: what does it MEAN for a process to have its own network??</p>
+</div>
+
+<div class="panel">
+<h3 id="namespaces-usually-have-2-interfaces">namespaces usually have 2 interfaces</h3>
+<p>(+ sometimes more) </p>
+<ul>
+<li>the loopback interface (127.0.0.1/8, for connections inside the namespace) </li>
+<li>another interface (for connections from outside)</li>
+</ul>
+</div>
+
+<div class="panel">
+<h3 id="every-server-listens-on-a-port-and-network-interface-s-">every server listens on a port and network interface(s)</h3>
+<p><code>0.0.0.0:8080</code> means &quot;port 8080 on every network interface in my namespace&quot;</p>
+</div>
+
+<div class="panel">
+<h3 id="127-0-0-1-stays-inside-your-namespace">127.0.0.1 stays inside your namespace</h3>
+<p>Illustration of a server, represented by a box with a smiley face, and a smiling stick figure with curly hair.</p>
+<p>server, thinking: I&#39;m listening on 127.0.0.1<br>person: that&#39;s fine but nobody outside your network server namespace will be able
+to make requests to you!</p>
+</div>
+
+<div class="panel">
+<h3 id="your-physical-network-card-is-in-the-host-network-namespace">your physical network card is in the host network namespace</h3>
+<p>Illustration of a rectangular box drawn with a dotted line. Inside it are:</p>
+<ul>
+<li>the label &quot;host network namespace&quot;</li>
+<li>192.168.1.149, with an arrow pointing to it reading &quot;requests from other computers&quot;</li>
+<li>network card</li>
+</ul>
+</div>
+
+<div class="panel">
+<h3 id="other-namespaces-are-connected-to-the-host-namespace-with-a-bridge">other namespaces are connected to the host namespace with a bridge</h3>
+<p>Illustration of a rectangular box drawn with a dotted line. Inside it are:</p>
+<ul>
+<li>the label &quot;host network namespace&quot;</li>
+<li>three boxes, each labelled &quot;container&quot;</li>
+</ul>
+</div>
+
+</div>
+</section>
+
+
+<section class="page">
+<h1>container IP addresses</h1>
+
+
+
+
+
+<div class="panels">
+
+
+<div class="panel">
+<h3 id="containers-often-get-their-own-ip-address">containers often get their own IP address</h3>
+<p>wordpress container 1: I&#39;m running WordPress at <code>172.17.2.3:8080</code>!</p>
+<p>wordpress container 2: I&#39;m using 172.17.0.49:8080!</p>
+</div>
+
+<div class="panel">
+<h3 id="containers-use-private-ip-addresses">containers use private IP addresses</h3>
+<p>These are reserved for private networks (RFC 1918).</p>
+<p>This is because they&#39;re not directly on the public internet.</p>
+</div>
+
+<div class="panel">
+<h3 id="for-a-packet-to-get-to-the-right-place-it-needs-a-route">for a packet to get to the right place, it needs a route</h3>
+<p>packet <code>172.16.2.3</code>: hi! I&#39;m here!</p>
+<p>router, represented by a box with a nonplussed expression: I don&#39;t have any entry
+matching <code>172.16.2.3</code> in my route table, sorry!</p>
+</div>
+
+<div class="panel">
+<h3 id="inside-the-same-computer-you-ll-have-the-right-routes">inside the same computer, you&#39;ll have the right routes</h3>
+<p>same computer:</p>
+<pre><code>$ curl <span class="hljs-number">172.16</span><span class="hljs-number">.2</span><span class="hljs-number">.3</span>:<span class="hljs-number">8080</span>
+&lt;html&gt;....
+</code></pre><p>different computer:</p>
+<pre><code>$ curl <span class="hljs-number">172.16</span><span class="hljs-number">.2</span><span class="hljs-number">.3</span>:<span class="hljs-number">8080</span>
+.... no reply ....
+</code></pre>
+</div>
+
+<div class="panel">
+<h3 id="distributing-the-right-routes-is-complicated">distributing the right routes is complicated</h3>
+<p>box with a smiley face: a new container started, 10.2.73.4 should go to X computer now</p>
+<p>route table, also represented by a box with a smiley face, thinking: wow these things change a lot</p>
+</div>
+
+<div class="panel">
+
+<h3 id="cloud-providers-have-systems-to-make-container-ips-work">cloud providers have systems to make container IPs work</h3>
+<p>In AWS, this is called an &quot;elastic network interface&quot; route table</p>
+</div>
+
+</div>
+</section>
+
+
+
+<section class="page">
+<h1>capabilities</h1>
+
+
+<div class="panels">
+
+
+
+
+<div class="panel">
+<p>we think of root as being all-powerful...</p>
+<ul>
+<li>edit any file</li>
+<li>change network config</li>
+<li>spy on any program&#39;s memory</li>
+</ul>
+</div>
+
+<div class="panel">
+<h3 id="-but-actually-to-do-root-things-a-process-needs-the-right-capabilities-">... but actually to do &quot;root&quot; things, a process needs the right  ★capabilities★</h3>
+<p>Process, represented by a box with a smiley face: I want to modify the route table!<br>Linux, represented by a penguin: you need CAP_NET_ADMIN!</p>
+
+</div>
+
+<div class="panel">
+<h3 id="there-are-dozens-of-capabilities">there are dozens of capabilities</h3>
+<p>Illustration of a smiling stick figure with curly hair.</p>
+<p>Person: <code>$ man capabilities</code> explains all of them but let&#39;s go over 2 important ones!</p>
+
+</div>
+
+<div class="panel">
+<h3 id="cap_sys_admin">CAP_SYS_ADMIN</h3>
+<p>lets you do a LOT of things. avoid giving this if you can!</p>
+
+
+<h3 id="cap_net_admin">CAP_NET_ADMIN</h3>
+<p>allow changing network settings</p>
+</div>
+
+<div class="panel">
+<h3 id="by-default-containers-have-limited-capabilities">by default containers have limited capabilities</h3>
+<p>Process: can I call process_vm_readv?
+Linux: nope! you&#39;d need CAP_SYS_PTRACE for that!</p>
+</div>
+
+<div class="panel">
+<h3 id="-getpcaps-pid">$ getpcaps PID</h3>
+<p>print capabilities that PID has</p>
+<h3 id="getcap-setcap">getcap / setcap</h3>
+<p>system calls: get and set capabilities!</p>
+</div>
+
+</div>
+</section>
+
+
+
+<section class="page">
+<h1>seccomp BPF</h1>
+
+
+<div class="panels">
+<div class="panel">
+<h3 id="all-programs-use-system-calls">all programs use system calls</h3>
+<p>program, represented by a box with a smiley face: read 2000 bytes from this file</p>
+<p>Linux, represented by a box with a smiley face:here you go!</p>
+</div>
+
+<div class="panel">
+<h3 id="rarely-used-system-calls-can-help-an-attacker">rarely-used system calls can help an attacker</h3>
+<ul>
+<li><code>reboot</code></li>
+<li><code>request_key</code></li>
+<li><code>process_vm_readv</code> (read memory from another process)</li>
+</ul>
+</div>
+
+<div class="panel">
+<h3 id="seccomp-bpf-lets-you-run-a-function-before-every-system-call">seccomp-BPF lets you run a function before every system call</h3>
+<p>smiling stick figure with short curly hair: run this function before every syscall that process makes</p>
+<p>Linux, represented by a box with a smiley face: okay! </p>
+</div>
+
+<div class="panel">
+<h3 id="the-function-decides-if-that-syscall-is-allowed">the function decides if that syscall is allowed</h3>
+<p>example function:</p>
+<pre><code><span class="hljs-keyword">if</span> name <span class="hljs-keyword">in</span> allowed_list {
+   <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+</code></pre><p><code>return false</code> means the syscall doesn&#39;t happen!</p>
+</div>
+
+<div class="panel">
+<h3 id="docker-blocks-dozens-of-syscalls-by-default">Docker blocks dozens of syscalls by default</h3>
+<p>Docker, represented by a box with a smiley face: most programs don&#39;t need those
+system calls so I told Linux to block them for you!</p>
+</div>
+
+<div class="panel">
+<h3 id="2-ways-to-block-scary-system-calls">2 ways to block scary system calls</h3>
+<ol>
+<li>limit the container&#39;s capabilities</li>
+<li>set a seccomp-bpf whitelist</li>
+</ol>
+<p>You should do both!</p>
+</div>
+
+
+</div>
+</section>
+
+
+
+
+<section class="page">
+<h1>configuration options</h1>
+
+
+<div class="panels">
+
+<div class="panel">
+
+<p>Illustration of a smiling stick figure with curly hair.</p>
+<p>person: here are the 6 most important things you can configure when starting a container!</p>
+</div>
+
+<div class="panel">
+<h3 id="map-a-port-to-the-host">map a port to the host</h3>
+<p>Illustration of two boxes drawn with dotted lines. One is labelled &quot;host&quot;, the other is labelled &quot;container&quot;. The &quot;host&quot; box says &quot;port 1234&quot;, and the &quot;container box&quot; is labelled &quot;port 8080&quot;. There is a double-ended arrow pointing back and forth between the two ports.</p>
+</div>
+
+<div class="panel">
+<h3 id="mount-directories-from-the-host">mount directories from the host</h3>
+<p>Illustration of two boxes drawn with dotted lines. One is labelled &quot;host&quot;, the other is labelled &quot;container&quot;. The &quot;host&quot; box says &quot;<code>~/code/blah</code>&quot;, and the &quot;container box&quot; says &quot;<code>/src</code>&quot;. There is a double-ended arrow pointing back and forth between the two boxes.</p>
+</div>
+
+<div class="panel">
+<h3 id="set-capabilities">set capabilities</h3>
+
+<h3 id="add-seccomp-bpf-filters">add seccomp-bpf filters</h3>
+</div>
+
+<div class="panel">
+<h3 id="set-memory-and-cpu-limits">set memory and CPU limits</h3>
+<p>person: only 200 MB RAM for you</p>
+</div>
+
+<div class="panel">
+<h3 id="use-the-host-network-namespace">use the host network namespace</h3>
+<p>Usually the default is to use a new network namespace!</p>
+
+</div>
+
+
+</div>
+</section>
+
+<section class="page">
+<h1>thanks for reading</h1>
+<p>I did a bunch of the research for this zine by reading the man pages.
+But, much more importantly, I experimented-- a lot!
+
+<p>smiling stick figure with curly hair: let's see, what happens if I create a
+cgroup with a memory limit of 5MB?  oh cool, if I try to run a
+program that uses 10MB of memory in the cgroup it gets
+killed! that makes sense!
+
+<p>So, if you have access to a Linux machine, try things out!
+Mount an overlay filesystem! Create a namespace! See what happens!
+
+
+<h2>credits</h2>
+<ul>
+<li>Cover art: Vladimir Kašiković
+<li>Editing: Dolly Lanuza, Kamal Marhubi
+<li>Copy editing: Courtney Johnson 
+</ul>
+</section>
+
+<section class="page"><h1>back cover</h1>
+<div align="center">
+<p>love this? more at wizardzines.com</p>
+</div>
+</section>
