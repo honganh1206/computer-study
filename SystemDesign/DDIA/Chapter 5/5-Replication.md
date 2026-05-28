@@ -13,3 +13,10 @@
 All the difficulty in replication lies in *handling changes to replicated data*.
 
 [[Leaders and Followers]]
+
+[[Replication Lag]]
+
+[[Multi-Leader Replication]]
+
+[[Leaderless Replication]]
+

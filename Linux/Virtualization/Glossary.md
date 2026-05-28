@@ -36,7 +36,7 @@ Kernel logging function (like `printf` for kernel)
 
 ### PCI
 
-Hardware bus for attaching devices (removed here)
+Hardware bus for attaching devices
 
 ### EFI
 
