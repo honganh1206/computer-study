@@ -12,7 +12,7 @@ A shell process can terminate its child process running `a.out` by sending a `SI
 
 Similarly, when an user types `CTRL-C` in a Unix shell, the child process receives a `SIGINT` signal calling `exit`.
 
-After executing `exit`, the OS delivers a `SIGCHILD` signal to the parent process to notify it that the child has exited and thus become a *zombie process* (its execution state is cleaned up, but the OS still maintains a little information about it)
+After executing `exit`, the OS delivers a `SIGCHLD` signal to the parent process to notify it that the child has exited and thus become a *zombie process* (its execution state is cleaned up, but the OS still maintains a little information like the exit status about it)
 
 [[Waiting, Blocking and Reaping]]
 
