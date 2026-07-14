@@ -1,7 +1,5 @@
 Three architectural pillars of modern Linux virtualization: **KVM (engine), QEMU (body), and libvirt (manager)** that transform physical hardware into efficient cloud infrastructure. 
 
-![[image.png]]
-
 Critical technical concepts such as **Type 1 hypervisors**, the performance impact of **VM exits**, and the necessity of **virtio drivers** to mitigate I/O bottlenecks.
 
 KVM provides direct access to hardware using the existing kernel and drivers
@@ -22,9 +20,15 @@ KVM is a Linux kernel feature
 
 KVM is a high-privilege kernel communication channel, passing commands and params directly to drivers
 
+KVM acts as a proxy between user space and a class of privileged instructions known as VMX (Intel) without having us to write a kernel module. 
+
+Once activated, the KVM makes the code think it's running on bare metal, but in reality we stand right beside the code in user space, intercepting its every move.
+
 ![[image-4.png]]
 
-Each vCPU works as a special thread
+A vCPU is a data structure + control loop managed by KVM. It represents one "core" inside the VM. Think of it like an unpaid intern sitting in user space but thinks he is real hardware.
+
+Each vCPU works as a special thread. 
 
 When KVM_RUN, control leaves user space
 

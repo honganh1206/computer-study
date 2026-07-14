@@ -12,8 +12,9 @@ Every process has 7 namespaces for cgroup - pid - ser - uts - ipc - mnt - net
 
 Processes use their parent's namespace by default.
 
-System calls for namespaces: `clone` (make a new process), `unshare` (make + use a namespace), `setns` (use an existing namespace)
+System calls for namespaces: `clone` (make a new process), `unshare` (disassociate context between child and parent process), `setns` (use an existing namespace)
 
+> A kind of view/mapping for child process to trick it to see the root FS ("/") without seeing the host's real path like `/sys/fs/sandbox-123`
 ## PID namespaces
 
 The same process has different PIDs in different namespaces.

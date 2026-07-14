@@ -15,7 +15,5 @@ Say we want to extend the 4-bit sequence `0b0110` (6), we extend it by repeating
 0b11011 = -16 + 8 + 0 + 2 + 1 = -5
 ```
 
-See more
-
 [[Zero extension and sign extension]]
 

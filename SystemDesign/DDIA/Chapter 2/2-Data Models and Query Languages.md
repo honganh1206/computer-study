@@ -4,7 +4,9 @@ aliases: []
 tags: []
 ---
 > [!summary]
-> 
+> - Data started out as hierarchical model (one big tree), but it was not good with many-to-many relationship, thus we have the relational model.
+> - Non-relational databases were born for when data is a self-contained documents (document databases) or when anything is potentially related to everything (graph databases).
+> - Non-relational databases do not enforce a schema for the data they store, but applications still assume whether the stored data has a structure, either enforced on write or handled on read.
 # 2-Data Models and Query Languages
 
 Most applications are built by _layering one data model on top of another_. But the question remains: [How is it represented in terms of the next-lower layer?](./How is it represented in terms of the next-lower layer.md)

@@ -4,7 +4,6 @@ aliases:
   - Linking
 tags: []
 ---
-
 # Linking
 
 Create a single executable file `.out` from relocatable binaries `.o` and libraries `.a` or `.so`
